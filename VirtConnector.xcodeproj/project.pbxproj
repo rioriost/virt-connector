@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		40A68677258E1B391565C304 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E956AD6E9DCD684CE547B22 /* StatusItemController.swift */; };
+		41084CB77D95DACACCA5EB51 /* MatterDeviceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F2D39BD5C3F676B95C171 /* MatterDeviceConfiguration.swift */; };
+		524A6DBAD760CB2BB88FEE96 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFC1120E31AD13A3EA01420 /* AppSettings.swift */; };
+		52AB7353139AF25576E425D1 /* PowerEventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8780CCEB612F53E17CEA0DB /* PowerEventMonitor.swift */; };
+		6A14AF73DFD7807DA8C2CAD0 /* LoginItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793C4A8A432409A99119069C /* LoginItemManager.swift */; };
+		73548BB8B3ADCF3436B825A1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA7F2DE01FA97C0299C9DBA1 /* Localizable.strings */; };
+		851BC7A8327C67D1CBAF63BD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441AC444A3D0B308634BE895 /* InfoPlist.strings */; };
+		9149E4FD2791401CC0766641 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E33B8DD83BE8B49FF4BB93 /* SettingsView.swift */; };
+		93E50B6F39C532620DC9EE23 /* DevicePowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A618173929F52E4C1785244 /* DevicePowerController.swift */; };
+		A2916C308C67A354688F90D2 /* PowerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1A6B100C37AFC20F6F16AC /* PowerCoordinator.swift */; };
+		A8FD5786936BDACD60E65F52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278D8DB4D46BBB59F2437A89 /* AppDelegate.swift */; };
+		DCB2ACB8D38E0D8C2FBCA7F3 /* MatterDevicePowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553130A43246011EBEC9276 /* MatterDevicePowerController.swift */; };
+		F74A3BDBBC8B2DBF3C9DF281 /* PowerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42D854CB287D40CD000578A /* PowerEvent.swift */; };
+		FFF27F8B20810BB705C1ED6F /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30318F821E80F675D362552 /* SettingsWindowController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D1A6B100C37AFC20F6F16AC /* PowerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerCoordinator.swift; sourceTree = "<group>"; };
+		278D8DB4D46BBB59F2437A89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		408FED5FC02109EDBE58D174 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4372E23AF0B3EC1459FEC1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		793C4A8A432409A99119069C /* LoginItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemManager.swift; sourceTree = "<group>"; };
+		8A618173929F52E4C1785244 /* DevicePowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePowerController.swift; sourceTree = "<group>"; };
+		8E956AD6E9DCD684CE547B22 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
+		90A75918AC263C6C8CDB2702 /* VirtConnector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtConnector.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9553130A43246011EBEC9276 /* MatterDevicePowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDevicePowerController.swift; sourceTree = "<group>"; };
+		A15F2D39BD5C3F676B95C171 /* MatterDeviceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDeviceConfiguration.swift; sourceTree = "<group>"; };
+		BAFC1120E31AD13A3EA01420 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		BE52E1DD0548869B4BEAC596 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C42D854CB287D40CD000578A /* PowerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerEvent.swift; sourceTree = "<group>"; };
+		C46C1F96DBFDAE66533B0FA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C8780CCEB612F53E17CEA0DB /* PowerEventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerEventMonitor.swift; sourceTree = "<group>"; };
+		D30318F821E80F675D362552 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		EBA85A71143A5548DCDD60ED /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F3E33B8DD83BE8B49FF4BB93 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		07112FF4F09D043B24B07E42 = {
+			isa = PBXGroup;
+			children = (
+				DF4EBF7E5962E5798031F786 /* Resources */,
+				67CD81296B28AA2C50635447 /* VirtConnector */,
+				0E28F44990BD214CE707EC79 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0E28F44990BD214CE707EC79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				90A75918AC263C6C8CDB2702 /* VirtConnector.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1F60D1598A98288E30760447 /* Power */ = {
+			isa = PBXGroup;
+			children = (
+				1D1A6B100C37AFC20F6F16AC /* PowerCoordinator.swift */,
+				C42D854CB287D40CD000578A /* PowerEvent.swift */,
+				C8780CCEB612F53E17CEA0DB /* PowerEventMonitor.swift */,
+			);
+			path = Power;
+			sourceTree = "<group>";
+		};
+		6435A7556C0120D3435A9126 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BAFC1120E31AD13A3EA01420 /* AppSettings.swift */,
+				793C4A8A432409A99119069C /* LoginItemManager.swift */,
+				F3E33B8DD83BE8B49FF4BB93 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		67CD81296B28AA2C50635447 /* VirtConnector */ = {
+			isa = PBXGroup;
+			children = (
+				8036FFD917AE2601B8DE99FE /* App */,
+				9116B2960C170D4C1254C780 /* Device */,
+				1F60D1598A98288E30760447 /* Power */,
+				6435A7556C0120D3435A9126 /* Settings */,
+			);
+			name = VirtConnector;
+			path = Sources/VirtConnector;
+			sourceTree = "<group>";
+		};
+		8036FFD917AE2601B8DE99FE /* App */ = {
+			isa = PBXGroup;
+			children = (
+				278D8DB4D46BBB59F2437A89 /* AppDelegate.swift */,
+				D30318F821E80F675D362552 /* SettingsWindowController.swift */,
+				8E956AD6E9DCD684CE547B22 /* StatusItemController.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		9116B2960C170D4C1254C780 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				8A618173929F52E4C1785244 /* DevicePowerController.swift */,
+				A15F2D39BD5C3F676B95C171 /* MatterDeviceConfiguration.swift */,
+				9553130A43246011EBEC9276 /* MatterDevicePowerController.swift */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
+		DF4EBF7E5962E5798031F786 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4372E23AF0B3EC1459FEC1D6 /* Info.plist */,
+				441AC444A3D0B308634BE895 /* InfoPlist.strings */,
+				AA7F2DE01FA97C0299C9DBA1 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8B4BA4847B1DCE96A15C701D /* VirtConnector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05FD00825A98DA17B19B9C89 /* Build configuration list for PBXNativeTarget "VirtConnector" */;
+			buildPhases = (
+				12E5EB98482977175C1272D1 /* Sources */,
+				A6F2D0E27DA8B765263C11DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VirtConnector;
+			packageProductDependencies = (
+			);
+			productName = VirtConnector;
+			productReference = 90A75918AC263C6C8CDB2702 /* VirtConnector.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		310A161B7DB8E3D22CEFE073 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					8B4BA4847B1DCE96A15C701D = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A074DC9BFE883E59B8FBF72C /* Build configuration list for PBXProject "VirtConnector" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				ja,
+			);
+			mainGroup = 07112FF4F09D043B24B07E42;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 0E28F44990BD214CE707EC79 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8B4BA4847B1DCE96A15C701D /* VirtConnector */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A6F2D0E27DA8B765263C11DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				851BC7A8327C67D1CBAF63BD /* InfoPlist.strings in Resources */,
+				73548BB8B3ADCF3436B825A1 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		12E5EB98482977175C1272D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8FD5786936BDACD60E65F52 /* AppDelegate.swift in Sources */,
+				524A6DBAD760CB2BB88FEE96 /* AppSettings.swift in Sources */,
+				93E50B6F39C532620DC9EE23 /* DevicePowerController.swift in Sources */,
+				6A14AF73DFD7807DA8C2CAD0 /* LoginItemManager.swift in Sources */,
+				41084CB77D95DACACCA5EB51 /* MatterDeviceConfiguration.swift in Sources */,
+				DCB2ACB8D38E0D8C2FBCA7F3 /* MatterDevicePowerController.swift in Sources */,
+				A2916C308C67A354688F90D2 /* PowerCoordinator.swift in Sources */,
+				F74A3BDBBC8B2DBF3C9DF281 /* PowerEvent.swift in Sources */,
+				52AB7353139AF25576E425D1 /* PowerEventMonitor.swift in Sources */,
+				9149E4FD2791401CC0766641 /* SettingsView.swift in Sources */,
+				FFF27F8B20810BB705C1ED6F /* SettingsWindowController.swift in Sources */,
+				40A68677258E1B391565C304 /* StatusItemController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		441AC444A3D0B308634BE895 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C46C1F96DBFDAE66533B0FA4 /* en */,
+				408FED5FC02109EDBE58D174 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AA7F2DE01FA97C0299C9DBA1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE52E1DD0548869B4BEAC596 /* en */,
+				EBA85A71143A5548DCDD60ED /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		51CBC6E11458B4F9374235D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		5FEE400F611B6F3E339FDE17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = VirtConnector.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "st.rio.virt-connector";
+				PRODUCT_NAME = VirtConnector;
+				SDKROOT = macosx;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+			};
+			name = Release;
+		};
+		C2EC132341929890934FA08F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		FD30BF0E79F765031DE39A33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = VirtConnector.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "st.rio.virt-connector";
+				PRODUCT_NAME = VirtConnector;
+				SDKROOT = macosx;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05FD00825A98DA17B19B9C89 /* Build configuration list for PBXNativeTarget "VirtConnector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD30BF0E79F765031DE39A33 /* Debug */,
+				5FEE400F611B6F3E339FDE17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A074DC9BFE883E59B8FBF72C /* Build configuration list for PBXProject "VirtConnector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51CBC6E11458B4F9374235D9 /* Debug */,
+				C2EC132341929890934FA08F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 310A161B7DB8E3D22CEFE073 /* Project object */;
+}
