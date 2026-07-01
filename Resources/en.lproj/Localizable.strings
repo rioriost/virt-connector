@@ -36,6 +36,16 @@
 "settings.status.lastDate" = "Last request";
 "settings.status.lastError" = "Last error";
 
+"homekit.section" = "HomeKit";
+"homekit.status" = "Status";
+"homekit.status.noHomes" = "No homes found";
+"homekit.status.homeCount" = "%d homes";
+"homekit.refresh" = "Refresh";
+"homekit.home" = "Home";
+"homekit.room" = "Room";
+"homekit.noDevices" = "No HomeKit devices with On/Off control were found.";
+"homekit.error.deviceNotFound" = "The HomeKit device was not found.";
+
 "error.device.notConfigured" = "No Matter device is configured.";
 "error.device.noEnabledDevices" = "No enabled Matter device is configured.";
 "error.device.invalidConfiguration" = "%@ has an invalid Node ID or Endpoint ID.";

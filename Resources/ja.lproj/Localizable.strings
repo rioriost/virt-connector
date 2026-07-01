@@ -36,6 +36,16 @@
 "settings.status.lastDate" = "最後の要求";
 "settings.status.lastError" = "最後のエラー";
 
+"homekit.section" = "HomeKit";
+"homekit.status" = "状態";
+"homekit.status.noHomes" = "Homeが見つかりません";
+"homekit.status.homeCount" = "%d件のHome";
+"homekit.refresh" = "更新";
+"homekit.home" = "Home";
+"homekit.room" = "部屋";
+"homekit.noDevices" = "オン/オフ可能なHomeKitデバイスが見つかりません。";
+"homekit.error.deviceNotFound" = "HomeKitデバイスが見つかりません。";
+
 "error.device.notConfigured" = "Matterデバイスが設定されていません。";
 "error.device.noEnabledDevices" = "有効なMatterデバイスがありません。";
 "error.device.invalidConfiguration" = "%@ のNode IDまたはEndpoint IDが正しくありません。";

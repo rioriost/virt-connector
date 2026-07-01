@@ -2,6 +2,7 @@ name: VirtConnector
 options:
   bundleIdPrefix: st.rio
   deploymentTarget:
+    iOS: "17.0"
     macOS: "14.0"
 settings:
   base:
@@ -27,5 +28,31 @@ targets:
         CURRENT_PROJECT_VERSION: 1
         SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
         SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+  VirtConnectorCatalyst:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Sources/VirtConnectorCatalyst
+      - path: Resources/en.lproj
+      - path: Resources/ja.lproj
+    dependencies:
+      - sdk: HomeKit.framework
+      - sdk: IOKit.framework
+      - sdk: ServiceManagement.framework
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.virt-connector
+        PRODUCT_NAME: VirtConnector
+        INFOPLIST_FILE: Sources/VirtConnectorCatalyst/App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: VirtConnectorCatalyst.entitlements
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: NO
+        MARKETING_VERSION: 0.1.0
+        CURRENT_PROJECT_VERSION: 1
+        SUPPORTS_MACCATALYST: YES
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER: NO
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: ""

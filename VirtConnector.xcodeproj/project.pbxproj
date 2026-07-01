@@ -9,28 +9,50 @@
 /* Begin PBXBuildFile section */
 		24B0129F718587E4AD93C7E2 /* VirtConnectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E50599155E5360FBD1C803 /* VirtConnectorApp.swift */; };
 		41084CB77D95DACACCA5EB51 /* MatterDeviceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F2D39BD5C3F676B95C171 /* MatterDeviceConfiguration.swift */; };
+		419822DA0D66579B1510BF80 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C00F4D051B1387B2A1CCC31 /* ServiceManagement.framework */; };
 		524A6DBAD760CB2BB88FEE96 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFC1120E31AD13A3EA01420 /* AppSettings.swift */; };
 		52AB7353139AF25576E425D1 /* PowerEventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8780CCEB612F53E17CEA0DB /* PowerEventMonitor.swift */; };
 		532CF9640852F3F077E66731 /* ManagedMatterDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E63FF6172C489E91478FC /* ManagedMatterDevice.swift */; };
 		6A14AF73DFD7807DA8C2CAD0 /* LoginItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793C4A8A432409A99119069C /* LoginItemManager.swift */; };
 		73548BB8B3ADCF3436B825A1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA7F2DE01FA97C0299C9DBA1 /* Localizable.strings */; };
+		77B1F7832B03FBCDCDBEB5E7 /* CatalystPowerEventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA1A76471A2A9A41622CE2A /* CatalystPowerEventMonitor.swift */; };
+		7D97448464EFD956118A3AEF /* CatalystSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C06E1E68759A1C3C4DB91ED /* CatalystSettingsView.swift */; };
 		9149E4FD2791401CC0766641 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E33B8DD83BE8B49FF4BB93 /* SettingsView.swift */; };
 		93E50B6F39C532620DC9EE23 /* DevicePowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A618173929F52E4C1785244 /* DevicePowerController.swift */; };
+		9CF9A0B365B10E7B9B451A42 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDB4E1F4511674B22F63A01 /* HomeKit.framework */; };
 		A2916C308C67A354688F90D2 /* PowerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1A6B100C37AFC20F6F16AC /* PowerCoordinator.swift */; };
+		B1F50A438B9DB082D1F3EBFE /* PowerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338456D2E571041621912C6D /* PowerEvent.swift */; };
+		B4DFB05526689697F121A720 /* CatalystLoginItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C440A8C394246BCBAED76 /* CatalystLoginItemManager.swift */; };
+		CEF72512A4FD687D1A39DA23 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 986727C05D4444BC91B6B4F1 /* IOKit.framework */; };
+		D82D62F9020A66A835FBB337 /* VirtConnectorCatalystApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED044DA55A9709F99A0B4367 /* VirtConnectorCatalystApp.swift */; };
 		DCB2ACB8D38E0D8C2FBCA7F3 /* MatterDevicePowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553130A43246011EBEC9276 /* MatterDevicePowerController.swift */; };
+		EBB3B10929245A0995BF2B27 /* HomeKitDeviceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38527FD2558208001FE8036A /* HomeKitDeviceStore.swift */; };
 		ED56D488D5989C1425C06722 /* MenuBarAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D821FE1F2160E7262CFAE9A /* MenuBarAppModel.swift */; };
+		F224ECAC6A20AFAF6C96FBC2 /* CatalystAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B8577C128683C8BBBEE57B /* CatalystAppModel.swift */; };
 		F74A3BDBBC8B2DBF3C9DF281 /* PowerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42D854CB287D40CD000578A /* PowerEvent.swift */; };
 		FFF27F8B20810BB705C1ED6F /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30318F821E80F675D362552 /* SettingsWindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C06E1E68759A1C3C4DB91ED /* CatalystSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalystSettingsView.swift; sourceTree = "<group>"; };
 		1D1A6B100C37AFC20F6F16AC /* PowerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerCoordinator.swift; sourceTree = "<group>"; };
+		2C00F4D051B1387B2A1CCC31 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		338456D2E571041621912C6D /* PowerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerEvent.swift; sourceTree = "<group>"; };
+		38527FD2558208001FE8036A /* HomeKitDeviceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKitDeviceStore.swift; sourceTree = "<group>"; };
+		38B8577C128683C8BBBEE57B /* CatalystAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalystAppModel.swift; sourceTree = "<group>"; };
 		4372E23AF0B3EC1459FEC1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4432EF72FA3A9DCB5C29DD3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5D821FE1F2160E7262CFAE9A /* MenuBarAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarAppModel.swift; sourceTree = "<group>"; };
+		670B09EDD479ED741E31C864 /* en.lproj */ = {isa = PBXFileReference; path = en.lproj; sourceTree = "<group>"; };
+		691C440A8C394246BCBAED76 /* CatalystLoginItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalystLoginItemManager.swift; sourceTree = "<group>"; };
 		793C4A8A432409A99119069C /* LoginItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemManager.swift; sourceTree = "<group>"; };
+		8164AF7EB039EB33AFD20A3F /* VirtConnectorCatalyst.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = VirtConnectorCatalyst.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87F057805A3518155785ACD6 /* ja.lproj */ = {isa = PBXFileReference; path = ja.lproj; sourceTree = "<group>"; };
 		8A618173929F52E4C1785244 /* DevicePowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePowerController.swift; sourceTree = "<group>"; };
+		8DDB4E1F4511674B22F63A01 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		90A75918AC263C6C8CDB2702 /* VirtConnector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtConnector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9553130A43246011EBEC9276 /* MatterDevicePowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDevicePowerController.swift; sourceTree = "<group>"; };
+		986727C05D4444BC91B6B4F1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		A15F2D39BD5C3F676B95C171 /* MatterDeviceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDeviceConfiguration.swift; sourceTree = "<group>"; };
 		A9E50599155E5360FBD1C803 /* VirtConnectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtConnectorApp.swift; sourceTree = "<group>"; };
 		AF8E63FF6172C489E91478FC /* ManagedMatterDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedMatterDevice.swift; sourceTree = "<group>"; };
@@ -40,15 +62,42 @@
 		C8780CCEB612F53E17CEA0DB /* PowerEventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerEventMonitor.swift; sourceTree = "<group>"; };
 		D30318F821E80F675D362552 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		EBA85A71143A5548DCDD60ED /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED044DA55A9709F99A0B4367 /* VirtConnectorCatalystApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtConnectorCatalystApp.swift; sourceTree = "<group>"; };
 		F3E33B8DD83BE8B49FF4BB93 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		FCA1A76471A2A9A41622CE2A /* CatalystPowerEventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalystPowerEventMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		5B44EB9A79A9FF43AAC6CDFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CF9A0B365B10E7B9B451A42 /* HomeKit.framework in Frameworks */,
+				CEF72512A4FD687D1A39DA23 /* IOKit.framework in Frameworks */,
+				419822DA0D66579B1510BF80 /* ServiceManagement.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
+		02AF39970B0E3C7ED23DBCD6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				38B8577C128683C8BBBEE57B /* CatalystAppModel.swift */,
+				4432EF72FA3A9DCB5C29DD3E /* Info.plist */,
+				ED044DA55A9709F99A0B4367 /* VirtConnectorCatalystApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		07112FF4F09D043B24B07E42 = {
 			isa = PBXGroup;
 			children = (
 				DF4EBF7E5962E5798031F786 /* Resources */,
 				67CD81296B28AA2C50635447 /* VirtConnector */,
+				AF819F0C7D3987BAB10CF384 /* VirtConnectorCatalyst */,
+				B57F4A4B522AC8E90E445614 /* Frameworks */,
 				0E28F44990BD214CE707EC79 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,8 +106,17 @@
 			isa = PBXGroup;
 			children = (
 				90A75918AC263C6C8CDB2702 /* VirtConnector.app */,
+				8164AF7EB039EB33AFD20A3F /* VirtConnectorCatalyst.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		139697A45522297338955627 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0C06E1E68759A1C3C4DB91ED /* CatalystSettingsView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		1F60D1598A98288E30760447 /* Power */ = {
@@ -67,6 +125,15 @@
 				1D1A6B100C37AFC20F6F16AC /* PowerCoordinator.swift */,
 				C42D854CB287D40CD000578A /* PowerEvent.swift */,
 				C8780CCEB612F53E17CEA0DB /* PowerEventMonitor.swift */,
+			);
+			path = Power;
+			sourceTree = "<group>";
+		};
+		551108977E2AB2EEA0A32318 /* Power */ = {
+			isa = PBXGroup;
+			children = (
+				FCA1A76471A2A9A41622CE2A /* CatalystPowerEventMonitor.swift */,
+				338456D2E571041621912C6D /* PowerEvent.swift */,
 			);
 			path = Power;
 			sourceTree = "<group>";
@@ -94,6 +161,14 @@
 			path = Sources/VirtConnector;
 			sourceTree = "<group>";
 		};
+		7FAB00069549C6F8083CB6A3 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				691C440A8C394246BCBAED76 /* CatalystLoginItemManager.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
 		8036FFD917AE2601B8DE99FE /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,10 +189,43 @@
 			path = Device;
 			sourceTree = "<group>";
 		};
+		AF819F0C7D3987BAB10CF384 /* VirtConnectorCatalyst */ = {
+			isa = PBXGroup;
+			children = (
+				02AF39970B0E3C7ED23DBCD6 /* App */,
+				DE92A672BC15764757125E61 /* HomeKit */,
+				551108977E2AB2EEA0A32318 /* Power */,
+				7FAB00069549C6F8083CB6A3 /* System */,
+				139697A45522297338955627 /* UI */,
+			);
+			name = VirtConnectorCatalyst;
+			path = Sources/VirtConnectorCatalyst;
+			sourceTree = "<group>";
+		};
+		B57F4A4B522AC8E90E445614 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DDB4E1F4511674B22F63A01 /* HomeKit.framework */,
+				986727C05D4444BC91B6B4F1 /* IOKit.framework */,
+				2C00F4D051B1387B2A1CCC31 /* ServiceManagement.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE92A672BC15764757125E61 /* HomeKit */ = {
+			isa = PBXGroup;
+			children = (
+				38527FD2558208001FE8036A /* HomeKitDeviceStore.swift */,
+			);
+			path = HomeKit;
+			sourceTree = "<group>";
+		};
 		DF4EBF7E5962E5798031F786 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				670B09EDD479ED741E31C864 /* en.lproj */,
 				4372E23AF0B3EC1459FEC1D6 /* Info.plist */,
+				87F057805A3518155785ACD6 /* ja.lproj */,
 				AA7F2DE01FA97C0299C9DBA1 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -144,6 +252,24 @@
 			productReference = 90A75918AC263C6C8CDB2702 /* VirtConnector.app */;
 			productType = "com.apple.product-type.application";
 		};
+		902B4F3BCE1CADB9E97E58E4 /* VirtConnectorCatalyst */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 734B492A05628BBE669D84BB /* Build configuration list for PBXNativeTarget "VirtConnectorCatalyst" */;
+			buildPhases = (
+				70E283BB79336E0A38627C72 /* Sources */,
+				5B44EB9A79A9FF43AAC6CDFF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VirtConnectorCatalyst;
+			packageProductDependencies = (
+			);
+			productName = VirtConnectorCatalyst;
+			productReference = 8164AF7EB039EB33AFD20A3F /* VirtConnectorCatalyst.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -154,6 +280,10 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					8B4BA4847B1DCE96A15C701D = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					902B4F3BCE1CADB9E97E58E4 = {
 						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
@@ -175,6 +305,7 @@
 			projectRoot = "";
 			targets = (
 				8B4BA4847B1DCE96A15C701D /* VirtConnector */,
+				902B4F3BCE1CADB9E97E58E4 /* VirtConnectorCatalyst */,
 			);
 		};
 /* End PBXProject section */
@@ -211,6 +342,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		70E283BB79336E0A38627C72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F224ECAC6A20AFAF6C96FBC2 /* CatalystAppModel.swift in Sources */,
+				B4DFB05526689697F121A720 /* CatalystLoginItemManager.swift in Sources */,
+				77B1F7832B03FBCDCDBEB5E7 /* CatalystPowerEventMonitor.swift in Sources */,
+				7D97448464EFD956118A3AEF /* CatalystSettingsView.swift in Sources */,
+				EBB3B10929245A0995BF2B27 /* HomeKitDeviceStore.swift in Sources */,
+				B1F50A438B9DB082D1F3EBFE /* PowerEvent.swift in Sources */,
+				D82D62F9020A66A835FBB337 /* VirtConnectorCatalystApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -226,6 +371,33 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1900404C7D107DC4279BAA66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = VirtConnectorCatalyst.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Sources/VirtConnectorCatalyst/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "st.rio.virt-connector";
+				PRODUCT_NAME = VirtConnector;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		51CBC6E11458B4F9374235D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -278,17 +450,44 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
+		};
+		584C0258438038369BADA9C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = VirtConnectorCatalyst.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Sources/VirtConnectorCatalyst/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "st.rio.virt-connector";
+				PRODUCT_NAME = VirtConnector;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
 		};
 		5FEE400F611B6F3E339FDE17 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -361,11 +560,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 6.0;
@@ -405,6 +604,15 @@
 			buildConfigurations = (
 				FD30BF0E79F765031DE39A33 /* Debug */,
 				5FEE400F611B6F3E339FDE17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		734B492A05628BBE669D84BB /* Build configuration list for PBXNativeTarget "VirtConnectorCatalyst" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1900404C7D107DC4279BAA66 /* Debug */,
+				584C0258438038369BADA9C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
