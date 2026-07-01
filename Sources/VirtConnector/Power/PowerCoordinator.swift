@@ -19,7 +19,7 @@ final class PowerCoordinator {
     }
 
     func start() {
-        let monitor = PowerEventMonitor(settings: settings) { [weak self] event in
+        let monitor = PowerEventMonitor { [weak self] event in
             await self?.handle(event)
         }
         self.monitor = monitor

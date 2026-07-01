@@ -23,13 +23,9 @@
 "settings.action.noChange" = "変更なし";
 "settings.action.turnOn" = "オンにする";
 "settings.action.turnOff" = "オフにする";
-"settings.events.section" = "電源イベント";
 "settings.events.wake" = "Wake";
 "settings.events.sleep" = "Sleep";
 "settings.events.powerOff" = "PowerOff";
-"settings.events.enableWake" = "Wakeイベントを監視";
-"settings.events.enableSleep" = "Sleepイベントを監視";
-"settings.events.enablePowerOff" = "PowerOffイベントを監視";
 "settings.status.section" = "状態";
 "settings.status.lastState" = "最後の状態";
 "settings.status.lastReason" = "最後のトリガー";

@@ -44,7 +44,6 @@ struct SettingsView: View {
             Form {
                 launchSection
                 selectedDeviceSection
-                eventMonitorSection
                 statusSection
             }
             .formStyle(.grouped)
@@ -109,14 +108,6 @@ struct SettingsView: View {
                 Text(String(localized: "settings.device.empty"))
                     .foregroundStyle(.secondary)
             }
-        }
-    }
-
-    private var eventMonitorSection: some View {
-        Section(String(localized: "settings.events.section")) {
-            Toggle(String(localized: "settings.events.enableWake"), isOn: $settings.enableWake)
-            Toggle(String(localized: "settings.events.enableSleep"), isOn: $settings.enableSleep)
-            Toggle(String(localized: "settings.events.enablePowerOff"), isOn: $settings.enablePowerOff)
         }
     }
 

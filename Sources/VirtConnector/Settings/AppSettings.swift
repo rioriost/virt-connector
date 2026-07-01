@@ -8,9 +8,6 @@ final class AppSettings: ObservableObject {
         static let endpointID = "matter.endpointID"
         static let devices = "matter.devices"
         static let selectedDeviceID = "matter.selectedDeviceID"
-        static let enableWake = "events.enableWake"
-        static let enableSleep = "events.enableSleep"
-        static let enablePowerOff = "events.enablePowerOff"
         static let lastRequestedPowerState = "state.lastRequestedPowerState"
         static let lastTriggerReason = "state.lastTriggerReason"
         static let lastRequestDate = "state.lastRequestDate"
@@ -32,18 +29,6 @@ final class AppSettings: ObservableObject {
         didSet {
             defaults.set(selectedDeviceID?.uuidString, forKey: Key.selectedDeviceID)
         }
-    }
-
-    @Published var enableWake: Bool {
-        didSet { defaults.set(enableWake, forKey: Key.enableWake) }
-    }
-
-    @Published var enableSleep: Bool {
-        didSet { defaults.set(enableSleep, forKey: Key.enableSleep) }
-    }
-
-    @Published var enablePowerOff: Bool {
-        didSet { defaults.set(enablePowerOff, forKey: Key.enablePowerOff) }
     }
 
     @Published var lastRequestedPowerState: String {
@@ -74,16 +59,6 @@ final class AppSettings: ObservableObject {
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
 
-        if defaults.object(forKey: Key.enableWake) == nil {
-            defaults.set(true, forKey: Key.enableWake)
-        }
-        if defaults.object(forKey: Key.enableSleep) == nil {
-            defaults.set(true, forKey: Key.enableSleep)
-        }
-        if defaults.object(forKey: Key.enablePowerOff) == nil {
-            defaults.set(true, forKey: Key.enablePowerOff)
-        }
-
         let loadedDevices = Self.loadDevices(from: defaults) ?? Self.migratedDevices(from: defaults)
         devices = loadedDevices
         if
@@ -95,9 +70,6 @@ final class AppSettings: ObservableObject {
         } else {
             selectedDeviceID = loadedDevices.first?.id
         }
-        enableWake = defaults.bool(forKey: Key.enableWake)
-        enableSleep = defaults.bool(forKey: Key.enableSleep)
-        enablePowerOff = defaults.bool(forKey: Key.enablePowerOff)
         lastRequestedPowerState = defaults.string(forKey: Key.lastRequestedPowerState) ?? "-"
         lastTriggerReason = defaults.string(forKey: Key.lastTriggerReason) ?? "-"
         lastRequestDate = defaults.object(forKey: Key.lastRequestDate) as? Date

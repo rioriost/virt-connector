@@ -23,13 +23,9 @@
 "settings.action.noChange" = "No change";
 "settings.action.turnOn" = "Turn on";
 "settings.action.turnOff" = "Turn off";
-"settings.events.section" = "Power Events";
 "settings.events.wake" = "Wake";
 "settings.events.sleep" = "Sleep";
 "settings.events.powerOff" = "Power off";
-"settings.events.enableWake" = "Monitor wake events";
-"settings.events.enableSleep" = "Monitor sleep events";
-"settings.events.enablePowerOff" = "Monitor power off events";
 "settings.status.section" = "Status";
 "settings.status.lastState" = "Last state";
 "settings.status.lastReason" = "Last trigger";
