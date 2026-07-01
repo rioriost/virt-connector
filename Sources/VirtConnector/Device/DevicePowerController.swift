@@ -15,12 +15,18 @@ enum PowerTriggerReason: String {
 
 enum DevicePowerError: LocalizedError {
     case notConfigured
+    case noEnabledDevices
+    case invalidDeviceConfiguration(String)
     case unsupportedBackend
 
     var errorDescription: String? {
         switch self {
         case .notConfigured:
             String(localized: "error.device.notConfigured")
+        case .noEnabledDevices:
+            String(localized: "error.device.noEnabledDevices")
+        case let .invalidDeviceConfiguration(deviceName):
+            String(format: String(localized: "error.device.invalidConfiguration"), deviceName)
         case .unsupportedBackend:
             String(localized: "error.device.unsupportedBackend")
         }
@@ -29,5 +35,5 @@ enum DevicePowerError: LocalizedError {
 
 @MainActor
 protocol DevicePowerControlling {
-    func setPower(_ state: DevicePowerState, reason: PowerTriggerReason) async throws
+    func setPower(_ state: DevicePowerState, for configuration: MatterDeviceConfiguration, reason: PowerTriggerReason) async throws
 }

@@ -1,10 +1,13 @@
 import Foundation
+import SwiftUI
 
 @MainActor
 final class AppSettings: ObservableObject {
     private enum Key {
         static let nodeID = "matter.nodeID"
         static let endpointID = "matter.endpointID"
+        static let devices = "matter.devices"
+        static let selectedDeviceID = "matter.selectedDeviceID"
         static let enableWake = "events.enableWake"
         static let enableSleep = "events.enableSleep"
         static let enablePowerOff = "events.enablePowerOff"
@@ -16,12 +19,19 @@ final class AppSettings: ObservableObject {
 
     private let defaults: UserDefaults
 
-    @Published var nodeID: String {
-        didSet { defaults.set(nodeID, forKey: Key.nodeID) }
+    @Published var devices: [ManagedMatterDevice] {
+        didSet {
+            saveDevices()
+            if let selectedDeviceID, !devices.contains(where: { $0.id == selectedDeviceID }) {
+                self.selectedDeviceID = devices.first?.id
+            }
+        }
     }
 
-    @Published var endpointID: String {
-        didSet { defaults.set(endpointID, forKey: Key.endpointID) }
+    @Published var selectedDeviceID: UUID? {
+        didSet {
+            defaults.set(selectedDeviceID?.uuidString, forKey: Key.selectedDeviceID)
+        }
     }
 
     @Published var enableWake: Bool {
@@ -52,8 +62,13 @@ final class AppSettings: ObservableObject {
         didSet { defaults.set(lastErrorMessage, forKey: Key.lastErrorMessage) }
     }
 
-    var matterDeviceConfiguration: MatterDeviceConfiguration {
-        MatterDeviceConfiguration(nodeID: nodeID, endpointID: endpointID)
+    var selectedDevice: ManagedMatterDevice? {
+        guard let selectedDeviceID else { return devices.first }
+        return devices.first { $0.id == selectedDeviceID } ?? devices.first
+    }
+
+    var enabledConfiguredDevices: [ManagedMatterDevice] {
+        devices.filter { $0.isEnabled && $0.matterConfiguration.isConfigured }
     }
 
     init(defaults: UserDefaults = .standard) {
@@ -69,8 +84,17 @@ final class AppSettings: ObservableObject {
             defaults.set(true, forKey: Key.enablePowerOff)
         }
 
-        nodeID = defaults.string(forKey: Key.nodeID) ?? ""
-        endpointID = defaults.string(forKey: Key.endpointID) ?? "1"
+        let loadedDevices = Self.loadDevices(from: defaults) ?? Self.migratedDevices(from: defaults)
+        devices = loadedDevices
+        if
+            let selectedDeviceIDString = defaults.string(forKey: Key.selectedDeviceID),
+            let id = UUID(uuidString: selectedDeviceIDString),
+            loadedDevices.contains(where: { $0.id == id })
+        {
+            selectedDeviceID = id
+        } else {
+            selectedDeviceID = loadedDevices.first?.id
+        }
         enableWake = defaults.bool(forKey: Key.enableWake)
         enableSleep = defaults.bool(forKey: Key.enableSleep)
         enablePowerOff = defaults.bool(forKey: Key.enablePowerOff)
@@ -78,5 +102,50 @@ final class AppSettings: ObservableObject {
         lastTriggerReason = defaults.string(forKey: Key.lastTriggerReason) ?? "-"
         lastRequestDate = defaults.object(forKey: Key.lastRequestDate) as? Date
         lastErrorMessage = defaults.string(forKey: Key.lastErrorMessage) ?? "-"
+    }
+
+    func addDevice() {
+        var device = ManagedMatterDevice(displayName: String(localized: "settings.device.defaultName"))
+        if devices.contains(where: { $0.displayName == device.displayName }) {
+            device.displayName = String(format: String(localized: "settings.device.defaultNameWithNumber"), devices.count + 1)
+        }
+        devices.append(device)
+        selectedDeviceID = device.id
+    }
+
+    func removeSelectedDevice() {
+        guard let selectedDeviceID else { return }
+        devices.removeAll { $0.id == selectedDeviceID }
+        self.selectedDeviceID = devices.first?.id
+    }
+
+    func binding(for deviceID: UUID) -> Binding<ManagedMatterDevice>? {
+        guard let index = devices.firstIndex(where: { $0.id == deviceID }) else { return nil }
+        return Binding(
+            get: { self.devices[index] },
+            set: { self.devices[index] = $0 }
+        )
+    }
+
+    private func saveDevices() {
+        guard let data = try? JSONEncoder().encode(devices) else { return }
+        defaults.set(data, forKey: Key.devices)
+    }
+
+    private static func loadDevices(from defaults: UserDefaults) -> [ManagedMatterDevice]? {
+        guard let data = defaults.data(forKey: Key.devices) else { return nil }
+        return try? JSONDecoder().decode([ManagedMatterDevice].self, from: data)
+    }
+
+    private static func migratedDevices(from defaults: UserDefaults) -> [ManagedMatterDevice] {
+        let nodeID = defaults.string(forKey: Key.nodeID) ?? ""
+        let endpointID = defaults.string(forKey: Key.endpointID) ?? "1"
+        return [
+            ManagedMatterDevice(
+                displayName: String(localized: "settings.device.ledStrip"),
+                nodeID: nodeID,
+                endpointID: endpointID
+            )
+        ]
     }
 }

@@ -5,15 +5,6 @@ enum PowerEvent {
     case sleep
     case powerOff
 
-    var requestedState: DevicePowerState {
-        switch self {
-        case .wake:
-            .on
-        case .sleep, .powerOff:
-            .off
-        }
-    }
-
     var reason: PowerTriggerReason {
         switch self {
         case .wake:

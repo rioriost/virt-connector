@@ -11,6 +11,7 @@
 		41084CB77D95DACACCA5EB51 /* MatterDeviceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F2D39BD5C3F676B95C171 /* MatterDeviceConfiguration.swift */; };
 		524A6DBAD760CB2BB88FEE96 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFC1120E31AD13A3EA01420 /* AppSettings.swift */; };
 		52AB7353139AF25576E425D1 /* PowerEventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8780CCEB612F53E17CEA0DB /* PowerEventMonitor.swift */; };
+		532CF9640852F3F077E66731 /* ManagedMatterDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E63FF6172C489E91478FC /* ManagedMatterDevice.swift */; };
 		6A14AF73DFD7807DA8C2CAD0 /* LoginItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793C4A8A432409A99119069C /* LoginItemManager.swift */; };
 		73548BB8B3ADCF3436B825A1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA7F2DE01FA97C0299C9DBA1 /* Localizable.strings */; };
 		9149E4FD2791401CC0766641 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E33B8DD83BE8B49FF4BB93 /* SettingsView.swift */; };
@@ -32,6 +33,7 @@
 		9553130A43246011EBEC9276 /* MatterDevicePowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDevicePowerController.swift; sourceTree = "<group>"; };
 		A15F2D39BD5C3F676B95C171 /* MatterDeviceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDeviceConfiguration.swift; sourceTree = "<group>"; };
 		A9E50599155E5360FBD1C803 /* VirtConnectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtConnectorApp.swift; sourceTree = "<group>"; };
+		AF8E63FF6172C489E91478FC /* ManagedMatterDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedMatterDevice.swift; sourceTree = "<group>"; };
 		BAFC1120E31AD13A3EA01420 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		BE52E1DD0548869B4BEAC596 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C42D854CB287D40CD000578A /* PowerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerEvent.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			children = (
 				BAFC1120E31AD13A3EA01420 /* AppSettings.swift */,
 				793C4A8A432409A99119069C /* LoginItemManager.swift */,
+				AF8E63FF6172C489E91478FC /* ManagedMatterDevice.swift */,
 				F3E33B8DD83BE8B49FF4BB93 /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -195,6 +198,7 @@
 				524A6DBAD760CB2BB88FEE96 /* AppSettings.swift in Sources */,
 				93E50B6F39C532620DC9EE23 /* DevicePowerController.swift in Sources */,
 				6A14AF73DFD7807DA8C2CAD0 /* LoginItemManager.swift in Sources */,
+				532CF9640852F3F077E66731 /* ManagedMatterDevice.swift in Sources */,
 				41084CB77D95DACACCA5EB51 /* MatterDeviceConfiguration.swift in Sources */,
 				DCB2ACB8D38E0D8C2FBCA7F3 /* MatterDevicePowerController.swift in Sources */,
 				ED56D488D5989C1425C06722 /* MenuBarAppModel.swift in Sources */,
