@@ -1,5 +1,10 @@
 .DS_Store
+ctl-led.sh
+ledoff_shutdown.app/
+ledoff_shutdown.sh
 DerivedData/
+.build/
+dist/
 build/
 *.xcuserstate
 *.xcworkspace/xcuserdata/

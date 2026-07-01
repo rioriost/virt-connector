@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -eu
+
+INSTALL_DIR="/Library/VirtConnector/bin"
+AGENT_BIN="/Library/VirtConnector/VirtConnectorAgent.app/Contents/MacOS/virt-connectord"
+LINK_DIR="/usr/local/bin"
+
+mkdir -p "$LINK_DIR"
+ln -sf "$INSTALL_DIR/virt-connector" "$LINK_DIR/virt-connector"
+ln -sf "$AGENT_BIN" "$LINK_DIR/virt-connectord"
+
+exit 0
