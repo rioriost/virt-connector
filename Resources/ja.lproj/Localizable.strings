@@ -1,7 +1,6 @@
 "menu.turnOn" = "オンにする";
 "menu.turnOff" = "オフにする";
 "menu.settings" = "設定...";
-"menu.privacyPolicy" = "プライバシーポリシー";
 "menu.quit" = "VirtConnectorを終了";
 
 "settings.title" = "VirtConnector設定";

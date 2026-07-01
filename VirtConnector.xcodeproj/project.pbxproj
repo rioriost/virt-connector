@@ -13,7 +13,6 @@
 		52AB7353139AF25576E425D1 /* PowerEventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8780CCEB612F53E17CEA0DB /* PowerEventMonitor.swift */; };
 		6A14AF73DFD7807DA8C2CAD0 /* LoginItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793C4A8A432409A99119069C /* LoginItemManager.swift */; };
 		73548BB8B3ADCF3436B825A1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA7F2DE01FA97C0299C9DBA1 /* Localizable.strings */; };
-		789246AC925488A52873C916 /* PrivacyPolicy.html in Resources */ = {isa = PBXBuildFile; fileRef = A1D67B9E43C519BBDAEBEC96 /* PrivacyPolicy.html */; };
 		9149E4FD2791401CC0766641 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E33B8DD83BE8B49FF4BB93 /* SettingsView.swift */; };
 		93E50B6F39C532620DC9EE23 /* DevicePowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A618173929F52E4C1785244 /* DevicePowerController.swift */; };
 		A2916C308C67A354688F90D2 /* PowerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1A6B100C37AFC20F6F16AC /* PowerCoordinator.swift */; };
@@ -33,7 +32,6 @@
 		90A75918AC263C6C8CDB2702 /* VirtConnector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtConnector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9553130A43246011EBEC9276 /* MatterDevicePowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDevicePowerController.swift; sourceTree = "<group>"; };
 		A15F2D39BD5C3F676B95C171 /* MatterDeviceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDeviceConfiguration.swift; sourceTree = "<group>"; };
-		A1D67B9E43C519BBDAEBEC96 /* PrivacyPolicy.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = PrivacyPolicy.html; sourceTree = "<group>"; };
 		BAFC1120E31AD13A3EA01420 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		BE52E1DD0548869B4BEAC596 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C42D854CB287D40CD000578A /* PowerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerEvent.swift; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				4372E23AF0B3EC1459FEC1D6 /* Info.plist */,
-				A1D67B9E43C519BBDAEBEC96 /* PrivacyPolicy.html */,
 				AA7F2DE01FA97C0299C9DBA1 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -185,7 +182,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				73548BB8B3ADCF3436B825A1 /* Localizable.strings in Resources */,
-				789246AC925488A52873C916 /* PrivacyPolicy.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

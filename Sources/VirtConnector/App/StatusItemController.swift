@@ -22,7 +22,6 @@ final class StatusItemController: NSObject {
         menu.addItem(menuItem("menu.turnOff", action: #selector(turnOff)))
         menu.addItem(.separator())
         menu.addItem(menuItem("menu.settings", action: #selector(openSettings)))
-        menu.addItem(menuItem("menu.privacyPolicy", action: #selector(openPrivacyPolicy)))
         menu.addItem(.separator())
         menu.addItem(menuItem("menu.quit", action: #selector(quit)))
         statusItem.menu = menu
@@ -44,11 +43,6 @@ final class StatusItemController: NSObject {
 
     @objc private func openSettings() {
         settingsWindowController.show()
-    }
-
-    @objc private func openPrivacyPolicy() {
-        guard let url = Bundle.main.url(forResource: "PrivacyPolicy", withExtension: "html") else { return }
-        NSWorkspace.shared.open(url)
     }
 
     @objc private func quit() {

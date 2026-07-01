@@ -47,7 +47,7 @@ For App Store distribution, configure the Apple Developer App ID `st.rio.virt-co
 - Bundle ID: `st.rio.virt-connector`
 - Category: Utilities
 - License: MIT
-- Privacy policy: `Docs/PRIVACY.md`; publish this content to a stable URL for App Store Connect.
+- Privacy policy: `Docs/PRIVACY.md`; publish this content to a stable URL and register that URL in App Store Connect. The app itself does not expose an in-app privacy policy page.
 - Login item: user-controlled through Settings only.
 - Menu items: no keyboard shortcuts.
 - Entitlements: sandbox and network client are enabled. Add HomeKit entitlement only to a public HomeKit-capable target, such as a Mac Catalyst bridge.
