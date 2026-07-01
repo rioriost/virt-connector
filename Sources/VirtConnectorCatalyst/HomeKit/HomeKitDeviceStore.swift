@@ -1,5 +1,6 @@
 import Foundation
 import HomeKit
+import OSLog
 import SwiftUI
 
 struct HomeKitDeviceActionConfiguration: Codable, Equatable {
@@ -44,6 +45,7 @@ final class HomeKitDeviceStore: NSObject, ObservableObject {
     @Published private(set) var devices: [HomeKitControllableDevice] = []
     @Published var selectedDeviceID: String?
 
+    private let logger = Logger(subsystem: "st.rio.virt-connector", category: "HomeKitDeviceStore")
     private let manager = HMHomeManager()
     private let defaults: UserDefaults
     private var configurations: [String: HomeKitDeviceActionConfiguration]
@@ -73,6 +75,7 @@ final class HomeKitDeviceStore: NSObject, ObservableObject {
     func refreshDevices() {
         authorizationState = homesStatus
         devices = discoverDevices()
+        logHomeKitSnapshot()
         if selectedDeviceID == nil || !devices.contains(where: { $0.id == selectedDeviceID }) {
             selectedDeviceID = devices.first?.id
         }
@@ -137,6 +140,27 @@ final class HomeKitDeviceStore: NSObject, ObservableObject {
         return discovered.sorted { lhs, rhs in
             lhs.displayName.localizedStandardCompare(rhs.displayName) == .orderedAscending
         }
+    }
+
+    private func logHomeKitSnapshot() {
+        let homes = manager.homes
+        let accessoryCount = homes.reduce(0) { count, home in
+            count + home.accessories.count
+        }
+        let serviceCount = homes.reduce(0) { count, home in
+            count + home.accessories.reduce(0) { $0 + $1.services.count }
+        }
+        let powerCharacteristicCount = homes.reduce(0) { count, home in
+            count + home.accessories.reduce(0) { accessoryCount, accessory in
+                accessoryCount + accessory.services.reduce(0) { serviceCount, service in
+                    serviceCount + service.characteristics.filter { $0.characteristicType == HMCharacteristicTypePowerState }.count
+                }
+            }
+        }
+
+        logger.info(
+            "HomeKit snapshot: homes=\(homes.count, privacy: .public), accessories=\(accessoryCount, privacy: .public), services=\(serviceCount, privacy: .public), powerCharacteristics=\(powerCharacteristicCount, privacy: .public), controllableDevices=\(self.devices.count, privacy: .public)"
+        )
     }
 
     private func setPower(_ state: DevicePowerState, for device: HomeKitControllableDevice) async throws {
