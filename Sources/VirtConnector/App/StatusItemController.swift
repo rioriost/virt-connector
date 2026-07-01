@@ -14,8 +14,11 @@ final class StatusItemController: NSObject {
     }
 
     private func configure() {
+        statusItem.length = NSStatusItem.variableLength
+        statusItem.button?.title = "VC"
         statusItem.button?.image = NSImage(systemSymbolName: "powerplug", accessibilityDescription: "VirtConnector")
-        statusItem.button?.imagePosition = .imageOnly
+        statusItem.button?.imagePosition = .imageLeft
+        statusItem.button?.toolTip = "VirtConnector"
 
         let menu = NSMenu()
         menu.addItem(menuItem("menu.turnOn", action: #selector(turnOn)))
