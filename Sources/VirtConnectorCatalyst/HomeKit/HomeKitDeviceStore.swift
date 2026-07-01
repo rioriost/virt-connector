@@ -107,6 +107,8 @@ final class HomeKitDeviceStore: NSObject, ObservableObject {
             return (device, state)
         }
 
+        logger.info("Applying HomeKit event: reason=\(event.reason.rawValue, privacy: .public), requests=\(requests.count, privacy: .public)")
+
         for (device, state) in requests {
             try await setPower(state, for: device)
         }
@@ -165,17 +167,26 @@ final class HomeKitDeviceStore: NSObject, ObservableObject {
 
     private func setPower(_ state: DevicePowerState, for device: HomeKitControllableDevice) async throws {
         guard let characteristic = characteristic(for: device) else {
+            logger.error("HomeKit device not found: device=\(device.displayName, privacy: .public)")
             throw HomeKitDeviceStoreError.deviceNotFound
         }
 
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            characteristic.writeValue(NSNumber(value: state == .on), completionHandler: { error in
-                if let error {
-                    continuation.resume(throwing: error)
-                } else {
-                    continuation.resume()
-                }
-            })
+        logger.info("Writing HomeKit power state: device=\(device.displayName, privacy: .public), room=\(device.roomName, privacy: .public), state=\(state.rawValue, privacy: .public)")
+
+        do {
+            try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+                characteristic.writeValue(NSNumber(value: state == .on), completionHandler: { error in
+                    if let error {
+                        continuation.resume(throwing: error)
+                    } else {
+                        continuation.resume()
+                    }
+                })
+            }
+            logger.info("HomeKit power write succeeded: device=\(device.displayName, privacy: .public), state=\(state.rawValue, privacy: .public)")
+        } catch {
+            logger.error("HomeKit power write failed: device=\(device.displayName, privacy: .public), state=\(state.rawValue, privacy: .public), error=\(error.localizedDescription, privacy: .public)")
+            throw error
         }
     }
 
