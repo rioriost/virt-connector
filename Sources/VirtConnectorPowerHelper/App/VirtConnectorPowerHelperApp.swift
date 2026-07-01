@@ -1,111 +1,72 @@
 import AppKit
 import Foundation
-import IOKit
-import IOKit.pwr_mgt
 import OSLog
 
 final class VirtConnectorPowerHelperApp: NSObject, NSApplicationDelegate, @unchecked Sendable {
     private let logger = Logger(subsystem: "st.rio.virt-connector", category: "PowerHelper")
     private let relay = PowerEventRelay()
-    private var notificationPort: IONotificationPortRef?
-    private var notifier = io_object_t()
-    private var rootPort = io_connect_t()
     private var workspaceObservers: [NSObjectProtocol] = []
 
-    private static let messageCanSystemSleep = ioKitCommonMessage(0x270)
-    private static let messageSystemWillSleep = ioKitCommonMessage(0x280)
-    private static let messageSystemHasPoweredOn = ioKitCommonMessage(0x300)
-
     func applicationDidFinishLaunching(_ notification: Notification) {
-        startPowerMonitor()
-        startPowerOffMonitor()
+        guard ensureSingleInstance() else {
+            logger.error("Another power helper instance is already running; terminating duplicate")
+            NSApp.terminate(nil)
+            return
+        }
+
+        startWorkspaceMonitor()
         logger.info("VirtConnector power helper started")
     }
 
     func applicationWillTerminate(_ notification: Notification) {
-        stopPowerMonitor()
-        stopPowerOffMonitor()
+        stopWorkspaceMonitor()
     }
 
-    private func startPowerMonitor() {
-        rootPort = IORegisterForSystemPower(
-            Unmanaged.passUnretained(self).toOpaque(),
-            &notificationPort,
-            { refcon, service, messageType, messageArgument in
-                guard let refcon else { return }
-                let helper = Unmanaged<VirtConnectorPowerHelperApp>.fromOpaque(refcon).takeUnretainedValue()
-                helper.receivePowerMessage(service: service, messageType: messageType, messageArgument: messageArgument)
-            },
-            &notifier
-        )
-
-        guard rootPort != 0, let notificationPort else {
-            logger.error("Failed to register for system power notifications")
-            return
-        }
-
-        if let source = IONotificationPortGetRunLoopSource(notificationPort)?.takeUnretainedValue() {
-            CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes)
-        } else {
-            logger.error("Failed to get system power notification run loop source")
-        }
+    private func ensureSingleInstance() -> Bool {
+        let currentPID = ProcessInfo.processInfo.processIdentifier
+        let runningHelpers = NSRunningApplication.runningApplications(withBundleIdentifier: "st.rio.virt-connector.PowerHelper")
+        return !runningHelpers.contains { $0.processIdentifier != currentPID }
     }
 
-    private func stopPowerMonitor() {
-        if notifier != 0 {
-            IODeregisterForSystemPower(&notifier)
-            notifier = 0
-        }
-        if let notificationPort {
-            if let source = IONotificationPortGetRunLoopSource(notificationPort)?.takeUnretainedValue() {
-                CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes)
-            }
-            IONotificationPortDestroy(notificationPort)
-            self.notificationPort = nil
-        }
-        if rootPort != 0 {
-            IOServiceClose(rootPort)
-            rootPort = 0
-        }
-    }
+    private func startWorkspaceMonitor() {
+        guard workspaceObservers.isEmpty else { return }
 
-    private func startPowerOffMonitor() {
         let center = NSWorkspace.shared.notificationCenter
         workspaceObservers.append(
-            center.addObserver(forName: NSWorkspace.willPowerOffNotification, object: nil, queue: .main) { [weak self] _ in
+            center.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil) { [weak self] _ in
+                self?.handleSleep()
+            }
+        )
+        workspaceObservers.append(
+            center.addObserver(forName: NSWorkspace.didWakeNotification, object: nil, queue: nil) { [weak self] _ in
+                self?.handleWake()
+            }
+        )
+        workspaceObservers.append(
+            center.addObserver(forName: NSWorkspace.willPowerOffNotification, object: nil, queue: nil) { [weak self] _ in
                 self?.handlePowerOff()
             }
         )
+        logger.info("Workspace power monitor started")
     }
 
-    private func stopPowerOffMonitor() {
+    private func stopWorkspaceMonitor() {
         let center = NSWorkspace.shared.notificationCenter
         workspaceObservers.forEach { center.removeObserver($0) }
         workspaceObservers.removeAll()
     }
 
-    private func receivePowerMessage(service: io_service_t, messageType: UInt32, messageArgument: UnsafeMutableRawPointer?) {
-        switch messageType {
-        case Self.messageCanSystemSleep:
-            acknowledgePowerChange(messageArgument: messageArgument, eventName: "canSystemSleep")
-        case Self.messageSystemWillSleep:
-            guard let notificationID = Self.notificationID(from: messageArgument) else {
-                logger.error("Received systemWillSleep without notification ID")
-                return
-            }
-            logger.info("Received systemWillSleep")
-            let acknowledged = relay.send(.sleep, waitsForAcknowledgement: true)
-            if !acknowledged {
-                logger.error("Timed out waiting for app acknowledgement: event=sleep")
-            }
-            let result = IOAllowPowerChange(rootPort, notificationID)
-            logger.info("Acknowledged systemWillSleep: result=\(result, privacy: .public)")
-        case Self.messageSystemHasPoweredOn:
-            logger.info("Received systemHasPoweredOn")
-            _ = relay.send(.wake, waitsForAcknowledgement: false)
-        default:
-            break
+    private func handleSleep() {
+        logger.info("Received willSleep")
+        let acknowledged = relay.send(.sleep, waitsForAcknowledgement: true)
+        if !acknowledged {
+            logger.error("Timed out waiting for app acknowledgement: event=sleep")
         }
+    }
+
+    private func handleWake() {
+        logger.info("Received didWake")
+        _ = relay.send(.wake, waitsForAcknowledgement: false)
     }
 
     private func handlePowerOff() {
@@ -115,25 +76,5 @@ final class VirtConnectorPowerHelperApp: NSObject, NSApplicationDelegate, @unche
         if !acknowledged {
             logger.error("Timed out waiting for app acknowledgement: event=powerOff")
         }
-    }
-
-    private func acknowledgePowerChange(messageArgument: UnsafeMutableRawPointer?, eventName: String) {
-        guard let notificationID = Self.notificationID(from: messageArgument) else {
-            logger.error("Received \(eventName, privacy: .public) without notification ID")
-            return
-        }
-        let result = IOAllowPowerChange(rootPort, notificationID)
-        logger.info("Acknowledged \(eventName, privacy: .public): result=\(result, privacy: .public)")
-    }
-
-    private static func ioKitCommonMessage(_ message: UInt32) -> UInt32 {
-        let sysIOKit = UInt32(0x38000000)
-        let subIOKitCommon = UInt32(0x00000000)
-        return sysIOKit | subIOKitCommon | message
-    }
-
-    private static func notificationID(from messageArgument: UnsafeMutableRawPointer?) -> intptr_t? {
-        guard let messageArgument else { return nil }
-        return intptr_t(bitPattern: messageArgument)
     }
 }

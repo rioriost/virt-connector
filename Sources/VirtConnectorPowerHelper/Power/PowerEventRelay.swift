@@ -68,7 +68,25 @@ private final class AcknowledgementWaiter: NSObject {
     }
 
     func wait(timeout: TimeInterval) -> Bool {
-        semaphore.wait(timeout: .now() + timeout) == .success
+        guard Thread.isMainThread else {
+            return semaphore.wait(timeout: .now() + timeout) == .success
+        }
+
+        let deadline = Date().addingTimeInterval(timeout)
+        while Date() < deadline {
+            if acknowledged {
+                return true
+            }
+            RunLoop.current.run(mode: .default, before: min(deadline, Date().addingTimeInterval(0.05)))
+        }
+        return acknowledged
+    }
+
+    private var acknowledged: Bool {
+        lock.lock()
+        let value = didAcknowledge
+        lock.unlock()
+        return value
     }
 }
 
