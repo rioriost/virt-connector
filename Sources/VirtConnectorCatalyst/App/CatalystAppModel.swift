@@ -15,7 +15,7 @@ final class CatalystAppModel: ObservableObject {
     let loginItemManager = CatalystLoginItemManager()
     private let logger = Logger(subsystem: "st.rio.virt-connector", category: "CatalystAppModel")
     private let defaults: UserDefaults
-    private let powerMonitor: CatalystPowerEventMonitor
+    private let powerEventBridge: CatalystPowerEventBridge
 
     private enum Key {
         static let isMonitoringEnabled = "catalyst.monitoring.isEnabled"
@@ -27,12 +27,12 @@ final class CatalystAppModel: ObservableObject {
             defaults.set(true, forKey: Key.isMonitoringEnabled)
         }
         isMonitoringEnabled = defaults.bool(forKey: Key.isMonitoringEnabled)
-        powerMonitor = CatalystPowerEventMonitor()
+        powerEventBridge = CatalystPowerEventBridge()
     }
 
     func start() {
         homeStore.start()
-        powerMonitor.start { [weak self] event in
+        powerEventBridge.start { [weak self] event in
             await self?.handle(event)
         }
     }

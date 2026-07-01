@@ -39,9 +39,21 @@ targets:
       - path: Resources/en.lproj
       - path: Resources/ja.lproj
     dependencies:
+      - target: VirtConnectorPowerHelper
       - sdk: HomeKit.framework
-      - sdk: IOKit.framework
       - sdk: ServiceManagement.framework
+    postBuildScripts:
+      - name: Embed Power Helper Login Item
+        script: |
+          set -euo pipefail
+          helper_src="${SYMROOT}/${CONFIGURATION}/VirtConnectorPowerHelper.app"
+          helper_dst="${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Library/LoginItems/VirtConnectorPowerHelper.app"
+          helper_resource="${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Resources/VirtConnectorPowerHelper.app"
+          mkdir -p "$(dirname "${helper_dst}")"
+          rm -rf "${helper_dst}"
+          ditto "${helper_src}" "${helper_dst}"
+          rm -rf "${helper_resource}"
+        basedOnDependencyAnalysis: false
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: st.rio.virt-connector
@@ -54,5 +66,26 @@ targets:
         SUPPORTS_MACCATALYST: YES
         SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
         DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER: NO
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 23889H77KX
+  VirtConnectorPowerHelper:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: Sources/VirtConnectorPowerHelper
+    dependencies:
+      - sdk: IOKit.framework
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: st.rio.virt-connector.PowerHelper
+        PRODUCT_NAME: VirtConnectorPowerHelper
+        INFOPLIST_FILE: Sources/VirtConnectorPowerHelper/App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: VirtConnectorPowerHelper.entitlements
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: NO
+        MARKETING_VERSION: 0.1.0
+        CURRENT_PROJECT_VERSION: 1
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: 23889H77KX
