@@ -76,7 +76,8 @@ Japanese documentation is available in [README-ja.md](README-ja.md).
   - Triggered by `NSWorkspace.screensDidSleepNotification` or `NSWorkspace.willSleepNotification`.
 - `power_off`
   - Triggered when shutdown is explicitly started from the VirtConnector menu bar item or `virt-connector shutdown`.
-  - Apple menu shutdown and LaunchAgent `SIGTERM` are handled best-effort, but Shortcuts may already be unavailable by that phase.
+  - Apple menu shutdown may be handled best-effort through `NSWorkspace.willPowerOffNotification`, but Shortcuts may already be unavailable by that phase.
+  - LaunchAgent stop events such as Homebrew upgrades, `launchctl bootout`, or `SIGTERM` are not treated as `power_off`.
 
 Each device can choose `on`, `off`, or `none` for each event.
 
@@ -103,6 +104,8 @@ Installing the pkg does not register or start the LaunchAgent. The user explicit
 ```sh
 virt-connector setup
 ```
+
+When the Homebrew Cask is upgraded later, an existing enabled configuration is re-registered automatically so the LaunchAgent keeps running after the upgrade. Fresh installs without a configuration are not started automatically.
 
 Do not run `sudo virt-connector setup`. The LaunchAgent must be registered for the logged-in user and Aqua session. The CLI rejects sudo execution.
 
@@ -341,7 +344,7 @@ scripts/build-pkg.sh --notarize
 Update the Cask SHA256:
 
 ```sh
-VERSION=0.1.1 scripts/update-cask.sh dist/VirtConnector-0.1.1-signed.pkg
+VERSION=0.1.2 scripts/update-cask.sh dist/VirtConnector-0.1.2-signed.pkg
 ```
 
 ## Homebrew Formula

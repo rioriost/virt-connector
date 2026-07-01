@@ -1,6 +1,6 @@
 cask "virt-connector" do
-  version "0.1.0"
-  sha256 "PUT_SHA256_HERE"
+  version "0.1.2"
+  sha256 "76d34b1acae0833d36d0ccdbe8d12b9fd3f7e2897796859343092a682173beb9"
 
   url "https://github.com/rioriost/virt-connector/releases/download/v#{version}/VirtConnector-#{version}-signed.pkg"
   name "VirtConnector"
@@ -10,6 +10,21 @@ cask "virt-connector" do
   depends_on macos: :ventura
 
   pkg "VirtConnector-#{version}-signed.pkg"
+
+  postflight do
+    config_path = File.expand_path("~/.config/virt-connector/config.json")
+    if File.exist?(config_path)
+      begin
+        require "json"
+        config = JSON.parse(File.read(config_path))
+        if config.fetch("enabled", true)
+          system_command "/Library/VirtConnector/bin/virt-connector", args: ["install-agent"]
+        end
+      rescue JSON::ParserError
+        nil
+      end
+    end
+  end
 
   uninstall launchctl: "st.rio.virt-connectord",
             pkgutil: "st.rio.virt-connector.pkg",

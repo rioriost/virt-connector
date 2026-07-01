@@ -94,7 +94,7 @@ final class VirtConnectorDaemon: NSObject, NSApplicationDelegate {
             signal(signalNumber, SIG_IGN)
             let source = DispatchSource.makeSignalSource(signal: signalNumber, queue: .main)
             source.setEventHandler { [weak self] in
-                self?.handlePowerOff(reason: "signal \(signalNumber)", shouldExit: true)
+                self?.log.write("Received signal \(signalNumber), exiting without power_off action")
                 exit(0)
             }
             source.resume()

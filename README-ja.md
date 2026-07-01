@@ -74,7 +74,8 @@ virt-connector setup --device "LED Strip" --on TurnOnLED --off TurnOffLED
   - `NSWorkspace.screensDidSleepNotification`または`NSWorkspace.willSleepNotification`を受け取ったとき。
 - `power_off`
   - VirtConnectorのメニューバー項目「システム終了...」または`virt-connector shutdown`で明示的にシステム終了を開始したとき。
-  - Appleメニューの「システム終了...」やLaunchAgent終了時の`SIGTERM`でもbest-effortで実行を試みますが、Shortcutsがすでに終了処理に入っている場合は失敗することがあります。
+  - Appleメニューの「システム終了...」は`NSWorkspace.willPowerOffNotification`でbest-effortに扱える場合がありますが、Shortcutsがすでに終了処理に入っている場合は失敗することがあります。
+  - Homebrew upgrade、`launchctl bootout`、`SIGTERM`などのLaunchAgent停止イベントは`power_off`として扱いません。
 
 各デバイスはイベントごとに`on`、`off`、`none`を設定できます。
 
@@ -101,6 +102,8 @@ pkgのインストールだけではLaunchAgentは登録・起動しません。
 ```sh
 virt-connector setup
 ```
+
+以後のHomebrew Cask upgradeでは、既存configがあり監視が有効な場合だけLaunchAgentを自動で再登録します。configがない初回インストールでは自動起動しません。
 
 `sudo virt-connector setup`は使わないでください。LaunchAgentはログイン中のユーザーに対して登録する必要があるため、rootで実行すると正しいAquaセッションに登録できません。CLIは`sudo`実行を拒否します。
 
@@ -339,7 +342,7 @@ scripts/build-pkg.sh --notarize
 最終pkgのSHA256をCaskに反映:
 
 ```sh
-VERSION=0.1.1 scripts/update-cask.sh dist/VirtConnector-0.1.1-signed.pkg
+VERSION=0.1.2 scripts/update-cask.sh dist/VirtConnector-0.1.2-signed.pkg
 ```
 
 ## Homebrew Formula

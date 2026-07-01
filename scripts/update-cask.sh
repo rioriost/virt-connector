@@ -3,7 +3,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-VERSION="${VERSION:-0.1.1}"
+VERSION="${VERSION:-0.1.2}"
 PKG_PATH="${1:-"$ROOT_DIR/dist/VirtConnector-${VERSION}-signed.pkg"}"
 CASK_PATH="$ROOT_DIR/Casks/virt-connector.rb"
 
