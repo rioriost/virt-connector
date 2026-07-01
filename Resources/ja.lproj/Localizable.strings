@@ -1,6 +1,7 @@
 "menu.turnOn" = "オンにする";
 "menu.turnOff" = "オフにする";
 "menu.settings" = "設定...";
+"menu.privacyPolicy" = "プライバシーポリシー";
 "menu.quit" = "VirtConnectorを終了";
 
 "settings.title" = "VirtConnector設定";
@@ -8,7 +9,8 @@
 "settings.device.section" = "Matterデバイス";
 "settings.device.nodeID" = "Node ID";
 "settings.device.endpointID" = "Endpoint ID";
-"settings.device.note" = "デバイス検出は電源イベント監視から分離しています。On/Off clusterを持つペアリング済みMatter nodeとendpointを設定してください。";
+"settings.device.validation" = "Node IDとEndpoint IDには符号なし10進数を入力してください。";
+"settings.device.note" = "ネイティブmacOSビルドでは公開HomeKit APIを直接利用できません。現在のバックエンドは、直接Matter controllerまたは将来のHomeKit bridge向けの構成です。";
 "settings.events.section" = "電源イベント";
 "settings.events.wake" = "Wakeでデバイスをオン";
 "settings.events.sleep" = "Sleepでデバイスをオフ";
@@ -17,6 +19,7 @@
 "settings.status.lastState" = "最後の状態";
 "settings.status.lastReason" = "最後のトリガー";
 "settings.status.lastDate" = "最後の要求";
+"settings.status.lastError" = "最後のエラー";
 
 "error.device.notConfigured" = "Matterデバイスが設定されていません。";
-"error.device.unsupportedBackend" = "Matter制御バックエンドはまだ実装されていません。";
+"error.device.unsupportedBackend" = "直接Matter制御バックエンドは、commissioning済みfabricへまだ接続されていません。";

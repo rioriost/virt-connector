@@ -42,7 +42,9 @@ final class PowerCoordinator {
     private func send(_ state: DevicePowerState, reason: PowerTriggerReason) async {
         do {
             try await controller.setPower(state, reason: reason)
+            settings.lastErrorMessage = "-"
         } catch {
+            settings.lastErrorMessage = error.localizedDescription
             logger.error("Device power request failed: \(error.localizedDescription, privacy: .public)")
         }
     }

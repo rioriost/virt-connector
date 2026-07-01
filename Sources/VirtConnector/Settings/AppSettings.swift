@@ -11,6 +11,7 @@ final class AppSettings: ObservableObject {
         static let lastRequestedPowerState = "state.lastRequestedPowerState"
         static let lastTriggerReason = "state.lastTriggerReason"
         static let lastRequestDate = "state.lastRequestDate"
+        static let lastErrorMessage = "state.lastErrorMessage"
     }
 
     private let defaults: UserDefaults
@@ -47,6 +48,10 @@ final class AppSettings: ObservableObject {
         didSet { defaults.set(lastRequestDate, forKey: Key.lastRequestDate) }
     }
 
+    @Published var lastErrorMessage: String {
+        didSet { defaults.set(lastErrorMessage, forKey: Key.lastErrorMessage) }
+    }
+
     var matterDeviceConfiguration: MatterDeviceConfiguration {
         MatterDeviceConfiguration(nodeID: nodeID, endpointID: endpointID)
     }
@@ -72,5 +77,6 @@ final class AppSettings: ObservableObject {
         lastRequestedPowerState = defaults.string(forKey: Key.lastRequestedPowerState) ?? "-"
         lastTriggerReason = defaults.string(forKey: Key.lastTriggerReason) ?? "-"
         lastRequestDate = defaults.object(forKey: Key.lastRequestDate) as? Date
+        lastErrorMessage = defaults.string(forKey: Key.lastErrorMessage) ?? "-"
     }
 }

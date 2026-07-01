@@ -5,7 +5,14 @@ struct MatterDeviceConfiguration: Equatable {
     var endpointID: String
 
     var isConfigured: Bool {
-        !nodeID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-            && !endpointID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        parsedNodeID != nil && parsedEndpointID != nil
+    }
+
+    var parsedNodeID: UInt64? {
+        UInt64(nodeID.trimmingCharacters(in: .whitespacesAndNewlines))
+    }
+
+    var parsedEndpointID: UInt16? {
+        UInt16(endpointID.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 }

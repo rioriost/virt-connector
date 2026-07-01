@@ -19,6 +19,7 @@ final class MatterDevicePowerController: DevicePowerControlling {
         settings.lastRequestedPowerState = state.rawValue
         settings.lastTriggerReason = reason.rawValue
         settings.lastRequestDate = Date()
+        settings.lastErrorMessage = "-"
 
         logger.info(
             "Requested \(state.rawValue, privacy: .public) from \(reason.rawValue, privacy: .public) for node \(configuration.nodeID, privacy: .private), endpoint \(configuration.endpointID, privacy: .private)"

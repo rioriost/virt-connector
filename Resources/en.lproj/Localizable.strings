@@ -1,6 +1,7 @@
 "menu.turnOn" = "Turn On";
 "menu.turnOff" = "Turn Off";
 "menu.settings" = "Settings...";
+"menu.privacyPolicy" = "Privacy Policy";
 "menu.quit" = "Quit VirtConnector";
 
 "settings.title" = "VirtConnector Settings";
@@ -8,7 +9,8 @@
 "settings.device.section" = "Matter Device";
 "settings.device.nodeID" = "Node ID";
 "settings.device.endpointID" = "Endpoint ID";
-"settings.device.note" = "Device discovery is intentionally separated from power-event monitoring. Configure a paired Matter node and endpoint for the On/Off cluster.";
+"settings.device.validation" = "Node ID and Endpoint ID must be unsigned decimal numbers.";
+"settings.device.note" = "Native macOS builds cannot use the public HomeKit API directly. The current backend is prepared for a direct Matter controller or a future HomeKit bridge.";
 "settings.events.section" = "Power Events";
 "settings.events.wake" = "Wake turns device on";
 "settings.events.sleep" = "Sleep turns device off";
@@ -17,6 +19,7 @@
 "settings.status.lastState" = "Last state";
 "settings.status.lastReason" = "Last trigger";
 "settings.status.lastDate" = "Last request";
+"settings.status.lastError" = "Last error";
 
 "error.device.notConfigured" = "No Matter device is configured.";
-"error.device.unsupportedBackend" = "Matter control backend is not implemented yet.";
+"error.device.unsupportedBackend" = "The direct Matter control backend is not connected to a commissioned fabric yet.";

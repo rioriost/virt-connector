@@ -24,6 +24,11 @@ struct SettingsView: View {
             Section(String(localized: "settings.device.section")) {
                 TextField(String(localized: "settings.device.nodeID"), text: $settings.nodeID)
                 TextField(String(localized: "settings.device.endpointID"), text: $settings.endpointID)
+                if !settings.matterDeviceConfiguration.isConfigured {
+                    Text(String(localized: "settings.device.validation"))
+                        .foregroundStyle(.orange)
+                        .font(.caption)
+                }
                 Text(String(localized: "settings.device.note"))
                     .foregroundStyle(.secondary)
                     .font(.caption)
@@ -39,6 +44,7 @@ struct SettingsView: View {
                 LabeledContent(String(localized: "settings.status.lastState"), value: settings.lastRequestedPowerState)
                 LabeledContent(String(localized: "settings.status.lastReason"), value: settings.lastTriggerReason)
                 LabeledContent(String(localized: "settings.status.lastDate"), value: formattedLastRequestDate)
+                LabeledContent(String(localized: "settings.status.lastError"), value: settings.lastErrorMessage)
             }
         }
         .formStyle(.grouped)
