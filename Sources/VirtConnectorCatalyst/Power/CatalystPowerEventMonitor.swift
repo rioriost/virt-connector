@@ -1,4 +1,4 @@
-import Foundation
+@preconcurrency import Foundation
 import IOKit
 import IOKit.pwr_mgt
 import OSLog
@@ -6,9 +6,12 @@ import UIKit
 
 final class CatalystPowerEventMonitor: @unchecked Sendable {
     private let logger = Logger(subsystem: "st.rio.virt-connector", category: "CatalystPowerEventMonitor")
-    private let queue = DispatchQueue(label: "st.rio.virt-connector.power-events")
-    private let sleepHandlerTimeout: Duration = .seconds(10)
+    private let sleepHandlerTimeout: TimeInterval = 10
+    private let loopLock = NSLock()
     private var notificationPort: IONotificationPortRef?
+    private var notificationThread: Thread?
+    private var notificationRunLoop: CFRunLoop?
+    private var isNotificationLoopRunning = false
     private var notifier = io_object_t()
     private var rootPort = io_connect_t()
     private var terminationObserver: NSObjectProtocol?
@@ -39,7 +42,7 @@ final class CatalystPowerEventMonitor: @unchecked Sendable {
             return
         }
 
-        IONotificationPortSetDispatchQueue(notificationPort, queue)
+        startNotificationThread(notificationPort: notificationPort)
         logger.info("Catalyst power event monitor started")
     }
 
@@ -48,6 +51,7 @@ final class CatalystPowerEventMonitor: @unchecked Sendable {
             IODeregisterForSystemPower(&notifier)
             notifier = 0
         }
+        stopNotificationThread()
         if let notificationPort {
             IONotificationPortDestroy(notificationPort)
             self.notificationPort = nil
@@ -74,14 +78,12 @@ final class CatalystPowerEventMonitor: @unchecked Sendable {
             }
             let kernelPort = rootPort
             logger.info("Received systemWillSleep; applying configured actions before acknowledging sleep")
-            Task {
-                let completed = await self.runHandler(for: .sleep, timeout: self.sleepHandlerTimeout)
-                if !completed {
-                    self.logger.error("Sleep handler timed out before power acknowledgement")
-                }
-                let result = IOAllowPowerChange(kernelPort, notificationID)
-                self.logger.info("Acknowledged systemWillSleep: result=\(result, privacy: .public)")
+            let completed = runHandlerSynchronously(for: .sleep, timeout: sleepHandlerTimeout)
+            if !completed {
+                logger.error("Sleep handler timed out before power acknowledgement")
             }
+            let result = IOAllowPowerChange(kernelPort, notificationID)
+            logger.info("Acknowledged systemWillSleep: result=\(result, privacy: .public)")
         case Self.messageSystemHasPoweredOn:
             logger.info("Received systemHasPoweredOn")
             Task {
@@ -100,6 +102,57 @@ final class CatalystPowerEventMonitor: @unchecked Sendable {
         }
         let result = IOAllowPowerChange(rootPort, notificationID)
         logger.info("Acknowledged \(eventName, privacy: .public): result=\(result, privacy: .public)")
+    }
+
+    private func startNotificationThread(notificationPort: IONotificationPortRef) {
+        guard let source = IONotificationPortGetRunLoopSource(notificationPort)?.takeUnretainedValue() else {
+            logger.error("Failed to get IOKit power notification run loop source")
+            return
+        }
+
+        loopLock.lock()
+        isNotificationLoopRunning = true
+        loopLock.unlock()
+
+        let thread = Thread { [weak self] in
+            guard let self else { return }
+            let runLoop = CFRunLoopGetCurrent()
+            self.loopLock.lock()
+            self.notificationRunLoop = runLoop
+            self.loopLock.unlock()
+
+            CFRunLoopAddSource(runLoop, source, .commonModes)
+            self.logger.info("Catalyst power notification run loop started")
+
+            while self.notificationLoopShouldRun {
+                CFRunLoopRunInMode(.defaultMode, 1, false)
+            }
+
+            CFRunLoopRemoveSource(runLoop, source, .commonModes)
+            self.logger.info("Catalyst power notification run loop stopped")
+        }
+        thread.name = "st.rio.virt-connector.power-events"
+        notificationThread = thread
+        thread.start()
+    }
+
+    private func stopNotificationThread() {
+        loopLock.lock()
+        isNotificationLoopRunning = false
+        let runLoop = notificationRunLoop
+        notificationRunLoop = nil
+        notificationThread = nil
+        loopLock.unlock()
+
+        if let runLoop {
+            CFRunLoopStop(runLoop)
+        }
+    }
+
+    private var notificationLoopShouldRun: Bool {
+        loopLock.lock()
+        defer { loopLock.unlock() }
+        return isNotificationLoopRunning
     }
 
     @discardableResult
@@ -125,6 +178,17 @@ final class CatalystPowerEventMonitor: @unchecked Sendable {
                 }
             }
         }
+    }
+
+    private func runHandlerSynchronously(for event: PowerEvent, timeout: TimeInterval) -> Bool {
+        guard let handler else { return true }
+
+        let semaphore = DispatchSemaphore(value: 0)
+        Task {
+            await handler(event)
+            semaphore.signal()
+        }
+        return semaphore.wait(timeout: .now() + timeout) == .success
     }
 
     private static func ioKitCommonMessage(_ message: UInt32) -> UInt32 {

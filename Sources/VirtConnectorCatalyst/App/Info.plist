@@ -26,6 +26,10 @@
 	<string>VirtConnector uses HomeKit to list and control the Apple Home devices you choose.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026 Rio Fujita. Licensed under the MIT License.</string>
+	<key>NSSupportsAutomaticTermination</key>
+	<false/>
+	<key>NSSupportsSuddenTermination</key>
+	<false/>
 	<key>UILaunchScreen</key>
 	<dict/>
 </dict>
