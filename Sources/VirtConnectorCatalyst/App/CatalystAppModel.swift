@@ -4,7 +4,10 @@ import OSLog
 @MainActor
 final class CatalystAppModel: ObservableObject {
     @Published var isMonitoringEnabled: Bool {
-        didSet { defaults.set(isMonitoringEnabled, forKey: Key.isMonitoringEnabled) }
+        didSet {
+            defaults.set(isMonitoringEnabled, forKey: Key.isMonitoringEnabled)
+            updateMonitoringActivity()
+        }
     }
 
     @Published private(set) var lastTriggerReason: String = "-"
@@ -16,6 +19,7 @@ final class CatalystAppModel: ObservableObject {
     private let logger = Logger(subsystem: "st.rio.virt-connector", category: "CatalystAppModel")
     private let defaults: UserDefaults
     private let powerEventBridge: CatalystPowerEventBridge
+    private var monitoringActivity: NSObjectProtocol?
 
     private enum Key {
         static let isMonitoringEnabled = "catalyst.monitoring.isEnabled"
@@ -32,6 +36,7 @@ final class CatalystAppModel: ObservableObject {
 
     func start() {
         homeStore.start()
+        updateMonitoringActivity()
         powerEventBridge.start { [weak self] event in
             await self?.handle(event)
         }
@@ -59,6 +64,21 @@ final class CatalystAppModel: ObservableObject {
         } catch {
             lastErrorMessage = error.localizedDescription
             logger.error("Failed power event: reason=\(event.reason.rawValue, privacy: .public), error=\(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    private func updateMonitoringActivity() {
+        if isMonitoringEnabled {
+            guard monitoringActivity == nil else { return }
+            monitoringActivity = ProcessInfo.processInfo.beginActivity(
+                options: [.userInitiatedAllowingIdleSystemSleep],
+                reason: "VirtConnector monitoring power events"
+            )
+            logger.info("Monitoring activity started")
+        } else if let monitoringActivity {
+            ProcessInfo.processInfo.endActivity(monitoringActivity)
+            self.monitoringActivity = nil
+            logger.info("Monitoring activity ended")
         }
     }
 }

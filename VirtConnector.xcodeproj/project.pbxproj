@@ -20,6 +20,7 @@
 		6A87CBFFC6E40786B42CCC7E /* VirtConnectorPowerHelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE87CF256E971E5DEA6773B /* VirtConnectorPowerHelperApp.swift */; };
 		73548BB8B3ADCF3436B825A1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA7F2DE01FA97C0299C9DBA1 /* Localizable.strings */; };
 		7D97448464EFD956118A3AEF /* CatalystSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C06E1E68759A1C3C4DB91ED /* CatalystSettingsView.swift */; };
+		8098E288C214EB5A75898489 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 986727C05D4444BC91B6B4F1 /* IOKit.framework */; };
 		85499B84D5D99C9BAE9CA50B /* VirtConnectorPowerHelper.app in Resources */ = {isa = PBXBuildFile; fileRef = 3FD1DAF78451F02F0C593747 /* VirtConnectorPowerHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9149E4FD2791401CC0766641 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E33B8DD83BE8B49FF4BB93 /* SettingsView.swift */; };
 		93E50B6F39C532620DC9EE23 /* DevicePowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A618173929F52E4C1785244 /* DevicePowerController.swift */; };
@@ -69,6 +70,7 @@
 		8DDB4E1F4511674B22F63A01 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		90A75918AC263C6C8CDB2702 /* VirtConnector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtConnector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9553130A43246011EBEC9276 /* MatterDevicePowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDevicePowerController.swift; sourceTree = "<group>"; };
+		986727C05D4444BC91B6B4F1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		A15F2D39BD5C3F676B95C171 /* MatterDeviceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterDeviceConfiguration.swift; sourceTree = "<group>"; };
 		A9E50599155E5360FBD1C803 /* VirtConnectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtConnectorApp.swift; sourceTree = "<group>"; };
 		AF8E63FF6172C489E91478FC /* ManagedMatterDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedMatterDevice.swift; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 			files = (
 				9CF9A0B365B10E7B9B451A42 /* HomeKit.framework in Frameworks */,
 				419822DA0D66579B1510BF80 /* ServiceManagement.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CDFDDFAED7797D9E1ABB5DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8098E288C214EB5A75898489 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				8DDB4E1F4511674B22F63A01 /* HomeKit.framework */,
+				986727C05D4444BC91B6B4F1 /* IOKit.framework */,
 				2C00F4D051B1387B2A1CCC31 /* ServiceManagement.framework */,
 			);
 			name = Frameworks;
@@ -323,6 +334,7 @@
 			buildConfigurationList = 539172340DDDFE43B27E584B /* Build configuration list for PBXNativeTarget "VirtConnectorPowerHelper" */;
 			buildPhases = (
 				FA7D76C96BC7D9ACD43D62DF /* Sources */,
+				6CDFDDFAED7797D9E1ABB5DA /* Frameworks */,
 			);
 			buildRules = (
 			);

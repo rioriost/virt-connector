@@ -74,6 +74,8 @@ targets:
     deploymentTarget: "14.0"
     sources:
       - path: Sources/VirtConnectorPowerHelper
+    dependencies:
+      - sdk: IOKit.framework
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: st.rio.virt-connector.PowerHelper

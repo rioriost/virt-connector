@@ -10,9 +10,7 @@ enum HelperPowerEvent: String {
 final class PowerEventRelay {
     private let logger = Logger(subsystem: "st.rio.virt-connector", category: "PowerEventRelay")
     private let center = DistributedNotificationCenter.default()
-    private let acknowledgementTimeout: TimeInterval = 8
-
-    func send(_ event: HelperPowerEvent, waitsForAcknowledgement: Bool) -> Bool {
+    func send(_ event: HelperPowerEvent, waitsForAcknowledgement: Bool, acknowledgementTimeout: TimeInterval = 8) -> Bool {
         let eventID = UUID().uuidString
         let waiter = waitsForAcknowledgement ? AcknowledgementWaiter(eventID: eventID) : nil
 
