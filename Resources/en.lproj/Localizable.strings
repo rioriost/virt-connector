@@ -1,10 +1,14 @@
-"menu.turnOn" = "Turn On";
-"menu.turnOff" = "Turn Off";
+"menu.turnOn" = "Enable Linking";
+"menu.turnOff" = "Disable Linking";
 "menu.settings" = "Settings...";
 "menu.quit" = "Quit VirtConnector";
 
 "settings.title" = "VirtConnector Settings";
+"settings.tab.general" = "General";
+"settings.tab.devices" = "Devices";
 "settings.launchAtLogin" = "Launch at login";
+"settings.monitoring.enabled" = "Global linking";
+"settings.monitoring.note" = "When off, Wake/Sleep/Power Off events are still observed, but device actions are not run. This is the same setting as the menu On/Off commands.";
 "settings.device.section" = "Matter Device";
 "settings.device.name" = "Name";
 "settings.device.nodeID" = "Node ID";

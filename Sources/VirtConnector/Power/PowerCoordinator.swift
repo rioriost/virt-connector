@@ -32,7 +32,12 @@ final class PowerCoordinator {
         }
     }
 
+    func setMonitoringEnabled(_ isEnabled: Bool) {
+        settings.isMonitoringEnabled = isEnabled
+    }
+
     private func handle(_ event: PowerEvent) async {
+        guard settings.isMonitoringEnabled else { return }
         guard shouldAccept(event) else { return }
         lastEvent = event
         lastEventDate = Date()

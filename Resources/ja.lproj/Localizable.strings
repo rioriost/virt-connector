@@ -1,10 +1,14 @@
-"menu.turnOn" = "オンにする";
-"menu.turnOff" = "オフにする";
+"menu.turnOn" = "連動をオン";
+"menu.turnOff" = "連動をオフ";
 "menu.settings" = "設定...";
 "menu.quit" = "VirtConnectorを終了";
 
 "settings.title" = "VirtConnector設定";
+"settings.tab.general" = "General";
+"settings.tab.devices" = "Devices";
 "settings.launchAtLogin" = "ログイン時に起動";
+"settings.monitoring.enabled" = "全体連動";
+"settings.monitoring.note" = "オフの場合、Wake/Sleep/PowerOffイベントは検知しますが、デバイスへの連動操作は実行しません。メニューの連動オン/オフと同じ設定です。";
 "settings.device.section" = "Matterデバイス";
 "settings.device.name" = "名前";
 "settings.device.nodeID" = "Node ID";

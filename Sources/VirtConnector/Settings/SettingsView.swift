@@ -3,8 +3,62 @@ import SwiftUI
 struct SettingsView: View {
     @ObservedObject var settings: AppSettings
     @ObservedObject var loginItemManager: LoginItemManager
+    @State private var selectedTab: SettingsTab = .general
 
     var body: some View {
+        TabView(selection: $selectedTab) {
+            generalView
+                .tabItem { Text(String(localized: "settings.tab.general")) }
+                .tag(SettingsTab.general)
+
+            devicesView
+                .tabItem { Text(String(localized: "settings.tab.devices")) }
+                .tag(SettingsTab.devices)
+        }
+        .padding(16)
+        .frame(width: 760, height: 560)
+        .onAppear {
+            if selectedTab == .devices {
+                settings.selectFirstDevice()
+            }
+        }
+        .onChange(of: selectedTab) { _, newValue in
+            if newValue == .devices {
+                settings.selectFirstDevice()
+            }
+        }
+    }
+
+    private var generalView: some View {
+        Form {
+            Section {
+                Toggle(
+                    String(localized: "settings.launchAtLogin"),
+                    isOn: Binding(
+                        get: { loginItemManager.isEnabled },
+                        set: { loginItemManager.setEnabled($0) }
+                    )
+                )
+                if let errorMessage = loginItemManager.errorMessage {
+                    Text(errorMessage)
+                        .foregroundStyle(.red)
+                        .font(.caption)
+                }
+            }
+
+            Section {
+                Toggle(String(localized: "settings.monitoring.enabled"), isOn: $settings.isMonitoringEnabled)
+                    .toggleStyle(.switch)
+                Text(String(localized: "settings.monitoring.note"))
+                    .foregroundStyle(.secondary)
+                    .font(.caption)
+            }
+        }
+        .formStyle(.grouped)
+        .padding(.top, 12)
+    }
+
+    private var devicesView: some View {
         HStack(spacing: 0) {
             VStack(spacing: 8) {
                 List(selection: $settings.selectedDeviceID) {
@@ -42,30 +96,11 @@ struct SettingsView: View {
             Divider()
 
             Form {
-                launchSection
                 selectedDeviceSection
                 statusSection
             }
             .formStyle(.grouped)
             .padding(16)
-        }
-        .frame(width: 760, height: 560)
-    }
-
-    private var launchSection: some View {
-        Section {
-            Toggle(
-                String(localized: "settings.launchAtLogin"),
-                isOn: Binding(
-                    get: { loginItemManager.isEnabled },
-                    set: { loginItemManager.setEnabled($0) }
-                )
-            )
-            if let errorMessage = loginItemManager.errorMessage {
-                Text(errorMessage)
-                    .foregroundStyle(.red)
-                    .font(.caption)
-            }
         }
     }
 
@@ -124,6 +159,11 @@ struct SettingsView: View {
         guard let date = settings.lastRequestDate else { return "-" }
         return date.formatted(date: .abbreviated, time: .standard)
     }
+}
+
+private enum SettingsTab {
+    case general
+    case devices
 }
 
 private struct DeviceRow: View {

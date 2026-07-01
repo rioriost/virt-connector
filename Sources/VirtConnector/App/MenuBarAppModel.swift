@@ -15,11 +15,11 @@ final class MenuBarAppModel: ObservableObject {
     }
 
     func turnOn() {
-        coordinator.requestPower(.on)
+        coordinator.setMonitoringEnabled(true)
     }
 
     func turnOff() {
-        coordinator.requestPower(.off)
+        coordinator.setMonitoringEnabled(false)
     }
 
     func openSettings() {

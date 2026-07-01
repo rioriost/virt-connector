@@ -8,6 +8,7 @@ final class AppSettings: ObservableObject {
         static let endpointID = "matter.endpointID"
         static let devices = "matter.devices"
         static let selectedDeviceID = "matter.selectedDeviceID"
+        static let isMonitoringEnabled = "monitoring.isEnabled"
         static let lastRequestedPowerState = "state.lastRequestedPowerState"
         static let lastTriggerReason = "state.lastTriggerReason"
         static let lastRequestDate = "state.lastRequestDate"
@@ -29,6 +30,10 @@ final class AppSettings: ObservableObject {
         didSet {
             defaults.set(selectedDeviceID?.uuidString, forKey: Key.selectedDeviceID)
         }
+    }
+
+    @Published var isMonitoringEnabled: Bool {
+        didSet { defaults.set(isMonitoringEnabled, forKey: Key.isMonitoringEnabled) }
     }
 
     @Published var lastRequestedPowerState: String {
@@ -59,6 +64,10 @@ final class AppSettings: ObservableObject {
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
 
+        if defaults.object(forKey: Key.isMonitoringEnabled) == nil {
+            defaults.set(true, forKey: Key.isMonitoringEnabled)
+        }
+
         let loadedDevices = Self.loadDevices(from: defaults) ?? Self.migratedDevices(from: defaults)
         devices = loadedDevices
         if
@@ -70,6 +79,7 @@ final class AppSettings: ObservableObject {
         } else {
             selectedDeviceID = loadedDevices.first?.id
         }
+        isMonitoringEnabled = defaults.bool(forKey: Key.isMonitoringEnabled)
         lastRequestedPowerState = defaults.string(forKey: Key.lastRequestedPowerState) ?? "-"
         lastTriggerReason = defaults.string(forKey: Key.lastTriggerReason) ?? "-"
         lastRequestDate = defaults.object(forKey: Key.lastRequestDate) as? Date
@@ -89,6 +99,10 @@ final class AppSettings: ObservableObject {
         guard let selectedDeviceID else { return }
         devices.removeAll { $0.id == selectedDeviceID }
         self.selectedDeviceID = devices.first?.id
+    }
+
+    func selectFirstDevice() {
+        selectedDeviceID = devices.first?.id
     }
 
     func binding(for deviceID: UUID) -> Binding<ManagedMatterDevice>? {
