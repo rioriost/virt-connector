@@ -5,7 +5,6 @@ import VirtConnectorCore
 @main
 final class VirtConnectorDaemon: NSObject, NSApplicationDelegate {
     private let configStore = ConfigStore()
-    private let displayLogReader = DisplayLogReader()
     private let log = FileLog.daemonLog()
     private lazy var executor = ActionExecutor(log: log)
     private lazy var shutdownPerformer = ShutdownPerformer(
@@ -14,13 +13,12 @@ final class VirtConnectorDaemon: NSObject, NSApplicationDelegate {
         log: log
     )
 
-    private var lastDisplayEntryKey: String?
-    private let pollQueue = DispatchQueue(label: "st.rio.virt-connectord.pmset-poll", qos: .utility)
-    private var pollTimer: DispatchSourceTimer?
+    private let actionQueue = DispatchQueue(label: "st.rio.virt-connectord.actions", qos: .userInitiated)
     private var signalSources: [DispatchSourceSignal] = []
     private var powerOffHandled = false
     private var statusItem: NSStatusItem?
     private var shutdownMenuItem: NSMenuItem?
+    private var lastDisplayEvent: (trigger: PowerTrigger, date: Date)?
     private let localizer = AgentLocalizer()
 
     static func main() {
@@ -37,61 +35,48 @@ final class VirtConnectorDaemon: NSObject, NSApplicationDelegate {
         ProcessInfo.processInfo.disableSuddenTermination()
         log.write("NSApplication initialized with accessory activation policy")
         installStatusMenu()
-        startDisplayPolling()
+        observeDisplayPowerEvents()
         observePowerOff()
         observeSignals()
         log.write("virt-connectord started")
     }
 
-    private func startDisplayPolling() {
-        let interval = max(configStore.loadOrDefault().pollIntervalSeconds, 1)
-        pollQueue.async { [weak self] in
-            guard let self else { return }
+    private func observeDisplayPowerEvents() {
+        let workspaceCenter = NSWorkspace.shared.notificationCenter
 
-            self.seedLatestDisplayEntry()
-
-            let timer = DispatchSource.makeTimerSource(queue: self.pollQueue)
-            timer.schedule(deadline: .now() + interval, repeating: interval)
-            timer.setEventHandler { [weak self] in
-                self?.pollDisplayLog()
-            }
-            self.pollTimer = timer
-            timer.resume()
-            self.log.write("Started display polling on background queue with interval=\(Int(interval))s")
+        workspaceCenter.addObserver(
+            forName: NSWorkspace.screensDidSleepNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.handleDisplayEvent(.displayOff, reason: "NSWorkspace.screensDidSleepNotification")
         }
-    }
 
-    private func seedLatestDisplayEntry() {
-        do {
-            let entry = try displayLogReader.latestDisplayEntry()
-            lastDisplayEntryKey = entry?.key
-            if let entry {
-                log.write("Seeded display event \(entry.key): \(entry.rawLine)")
-            } else {
-                log.write("No display event found while seeding")
-            }
-        } catch {
-            log.write("Failed to seed display event: \(error)")
+        workspaceCenter.addObserver(
+            forName: NSWorkspace.screensDidWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.handleDisplayEvent(.displayOn, reason: "NSWorkspace.screensDidWakeNotification")
         }
-    }
 
-    private func pollDisplayLog() {
-        do {
-            guard let entry = try displayLogReader.latestDisplayEntry() else {
-                log.write("No display event found")
-                return
-            }
-
-            guard entry.key != lastDisplayEntryKey else {
-                return
-            }
-
-            lastDisplayEntryKey = entry.key
-            log.write("Detected \(entry.trigger.rawValue): \(entry.rawLine)")
-            execute(entry.trigger)
-        } catch {
-            log.write("Failed to poll display log: \(error)")
+        workspaceCenter.addObserver(
+            forName: NSWorkspace.willSleepNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.handleDisplayEvent(.displayOff, reason: "NSWorkspace.willSleepNotification")
         }
+
+        workspaceCenter.addObserver(
+            forName: NSWorkspace.didWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.handleDisplayEvent(.displayOn, reason: "NSWorkspace.didWakeNotification")
+        }
+
+        log.write("Installed NSWorkspace display sleep/wake observers")
     }
 
     private func observePowerOff() {
@@ -229,6 +214,28 @@ final class VirtConnectorDaemon: NSObject, NSApplicationDelegate {
     private func execute(_ trigger: PowerTrigger) {
         let config = configStore.loadOrDefault()
         _ = executor.execute(trigger: trigger, config: config)
+    }
+
+    private func executeAsync(_ trigger: PowerTrigger, reason: String) {
+        actionQueue.async { [weak self] in
+            guard let self else { return }
+            self.log.write("Handling \(trigger.rawValue) from \(reason)")
+            self.execute(trigger)
+        }
+    }
+
+    private func handleDisplayEvent(_ trigger: PowerTrigger, reason: String) {
+        let now = Date()
+        if let lastDisplayEvent,
+           lastDisplayEvent.trigger == trigger,
+           now.timeIntervalSince(lastDisplayEvent.date) < 2 {
+            log.write("Skipping duplicate \(trigger.rawValue) from \(reason)")
+            return
+        }
+
+        lastDisplayEvent = (trigger, now)
+        log.write("Detected \(trigger.rawValue) from \(reason)")
+        executeAsync(trigger, reason: reason)
     }
 
     private func handlePowerOff(reason: String, shouldExit: Bool) {

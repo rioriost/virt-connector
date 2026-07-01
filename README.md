@@ -66,14 +66,14 @@ Japanese documentation is available in [README-ja.md](README-ja.md).
   - Executable inside `VirtConnectorAgent.app/Contents/MacOS/virt-connectord`.
   - `/usr/local/bin/virt-connectord` is a symlink to this executable.
 
-`virt-connectord` runs outside the App Sandbox, so it can use the same `pmset -g log` approach as the original shell script.
+`virt-connectord` runs outside the App Sandbox as a user LaunchAgent. Display sleep/wake is handled with AppKit `NSWorkspace` notifications, avoiding continuous `pmset` polling.
 
 ## Events
 
 - `display_on`
-  - The latest `pmset -g log` display entry contains `Display is turned on`.
+  - Triggered by `NSWorkspace.screensDidWakeNotification` or `NSWorkspace.didWakeNotification`.
 - `display_off`
-  - The latest `pmset -g log` display entry contains `Display is turned off`.
+  - Triggered by `NSWorkspace.screensDidSleepNotification` or `NSWorkspace.willSleepNotification`.
 - `power_off`
   - Triggered when shutdown is explicitly started from the VirtConnector menu bar item or `virt-connector shutdown`.
   - Apple menu shutdown and LaunchAgent `SIGTERM` are handled best-effort, but Shortcuts may already be unavailable by that phase.
@@ -341,7 +341,7 @@ scripts/build-pkg.sh --notarize
 Update the Cask SHA256:
 
 ```sh
-VERSION=0.1.0 scripts/update-cask.sh dist/VirtConnector-0.1.0-signed.pkg
+VERSION=0.1.1 scripts/update-cask.sh dist/VirtConnector-0.1.1-signed.pkg
 ```
 
 ## Homebrew Formula

@@ -116,16 +116,13 @@ public struct ShortcutDevice: Codable, Equatable {
 
 public struct VirtConnectorConfig: Codable, Equatable {
     public var enabled: Bool
-    public var pollIntervalSeconds: TimeInterval
     public var devices: [ShortcutDevice]
 
     public init(
         enabled: Bool = true,
-        pollIntervalSeconds: TimeInterval = 5,
         devices: [ShortcutDevice] = []
     ) {
         self.enabled = enabled
-        self.pollIntervalSeconds = pollIntervalSeconds
         self.devices = devices
     }
 

@@ -64,14 +64,14 @@ virt-connector setup --device "LED Strip" --on TurnOnLED --off TurnOffLED
   - `VirtConnectorAgent.app/Contents/MacOS/virt-connectord`に含まれる実行ファイルです。
   - `/usr/local/bin/virt-connectord`はこの実行ファイルへのsymlinkです。
 
-`virt-connectord`は非Sandbox環境で動作するため、元のシェルスクリプトと同じく`pmset -g log`を利用できます。
+`virt-connectord`は非SandboxのユーザーLaunchAgentとして動作します。ディスプレイのスリープ/復帰はAppKitの`NSWorkspace`通知で検出し、継続的な`pmset`ポーリングは行いません。
 
 ## 監視イベント
 
 - `display_on`
-  - `pmset -g log`の最新ログに`Display is turned on`が現れたとき。
+  - `NSWorkspace.screensDidWakeNotification`または`NSWorkspace.didWakeNotification`を受け取ったとき。
 - `display_off`
-  - `pmset -g log`の最新ログに`Display is turned off`が現れたとき。
+  - `NSWorkspace.screensDidSleepNotification`または`NSWorkspace.willSleepNotification`を受け取ったとき。
 - `power_off`
   - VirtConnectorのメニューバー項目「システム終了...」または`virt-connector shutdown`で明示的にシステム終了を開始したとき。
   - Appleメニューの「システム終了...」やLaunchAgent終了時の`SIGTERM`でもbest-effortで実行を試みますが、Shortcutsがすでに終了処理に入っている場合は失敗することがあります。
@@ -339,7 +339,7 @@ scripts/build-pkg.sh --notarize
 最終pkgのSHA256をCaskに反映:
 
 ```sh
-VERSION=0.1.0 scripts/update-cask.sh dist/VirtConnector-0.1.0-signed.pkg
+VERSION=0.1.1 scripts/update-cask.sh dist/VirtConnector-0.1.1-signed.pkg
 ```
 
 ## Homebrew Formula

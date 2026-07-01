@@ -77,13 +77,6 @@ struct VirtConnectorCLI {
             )
         }
 
-        if let interval = options.value(for: "--poll-interval") {
-            guard let parsed = TimeInterval(interval), parsed >= 1 else {
-                throw CLIError.usage("--poll-interval must be a number >= 1")
-            }
-            config.pollIntervalSeconds = parsed
-        }
-
         config.enabled = true
         try store.save(config)
         try installAgent(arguments)
@@ -98,7 +91,6 @@ struct VirtConnectorCLI {
 
         print("Config: \(store.configURL.path)")
         print("Monitoring: \(config.enabled ? "enabled" : "disabled")")
-        print("Poll interval: \(Int(config.pollIntervalSeconds))s")
         print("Devices: \(config.devices.count)")
 
         for device in config.devices {
@@ -321,7 +313,7 @@ struct VirtConnectorCLI {
         print(
             """
             Usage:
-              virt-connector setup [--device NAME --on SHORTCUT --off SHORTCUT] [--poll-interval SECONDS]
+              virt-connector setup [--device NAME --on SHORTCUT --off SHORTCUT]
               virt-connector status
               virt-connector enable | disable
               virt-connector install-agent [--daemon PATH]
