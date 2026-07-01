@@ -21,8 +21,7 @@ struct VirtConnectorApp: App {
                 model.quit()
             }
         } label: {
-            Text("VC")
-                .monospaced()
+            Image(systemName: "powerplug")
         }
         .menuBarExtraStyle(.menu)
     }
