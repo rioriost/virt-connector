@@ -299,7 +299,7 @@ Casks/virt-connector.rb
 The Cask URL assumes GitHub Releases:
 
 ```text
-https://github.com/rioriost/virt-connector/releases/download/v#{version}/VirtConnector-#{version}-signed.pkg
+https://github.com/rioriost/Virt-Connector/releases/download/v#{version}/VirtConnector-#{version}-signed.pkg
 ```
 
 The Cask is published in the `rioriost/homebrew-cask` tap.

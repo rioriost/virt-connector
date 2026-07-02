@@ -297,7 +297,7 @@ Casks/virt-connector.rb
 CaskのURLはGitHub Releasesを前提にしています。
 
 ```text
-https://github.com/rioriost/virt-connector/releases/download/v#{version}/VirtConnector-#{version}-signed.pkg
+https://github.com/rioriost/Virt-Connector/releases/download/v#{version}/VirtConnector-#{version}-signed.pkg
 ```
 
 Caskは`rioriost/homebrew-cask` tapで公開します。
